@@ -20,6 +20,10 @@
 		18A1E73C2B64336500FE9FE3 /* ASTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E73B2B64336500FE9FE3 /* ASTextFieldDelegate.swift */; };
 		18A1E73E2B64337900FE9FE3 /* ASTextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E73D2B64337900FE9FE3 /* ASTextFieldType.swift */; };
 		18A1E7402B64344900FE9FE3 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E73F2B64344900FE9FE3 /* UIViewController.swift */; };
+		18A1E7422B643BE600FE9FE3 /* AvatarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7412B643BE600FE9FE3 /* AvatarCollectionViewCell.swift */; };
+		18A1E7442B643C7000FE9FE3 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7432B643C7000FE9FE3 /* ReusableView.swift */; };
+		18A1E7482B643CC800FE9FE3 /* AvatarCollectionViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7472B643CC800FE9FE3 /* AvatarCollectionViewCellModel.swift */; };
+		18A1E74B2B6451B200FE9FE3 /* Avatars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E74A2B6451B200FE9FE3 /* Avatars.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +41,10 @@
 		18A1E73B2B64336500FE9FE3 /* ASTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASTextFieldDelegate.swift; sourceTree = "<group>"; };
 		18A1E73D2B64337900FE9FE3 /* ASTextFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASTextFieldType.swift; sourceTree = "<group>"; };
 		18A1E73F2B64344900FE9FE3 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		18A1E7412B643BE600FE9FE3 /* AvatarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCollectionViewCell.swift; sourceTree = "<group>"; };
+		18A1E7432B643C7000FE9FE3 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
+		18A1E7472B643CC800FE9FE3 /* AvatarCollectionViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCollectionViewCellModel.swift; sourceTree = "<group>"; };
+		18A1E74A2B6451B200FE9FE3 /* Avatars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatars.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +82,7 @@
 				18A1E72E2B641A5300FE9FE3 /* Module */,
 				18A1E7302B641A7500FE9FE3 /* Components */,
 				18A1E72F2B641A6B00FE9FE3 /* Extension */,
-				18A1E7192B640E8400FE9FE3 /* Assets.xcassets */,
+				18A1E7492B64518200FE9FE3 /* Resources */,
 				18A1E71B2B640E8400FE9FE3 /* LaunchScreen.storyboard */,
 				18A1E71E2B640E8400FE9FE3 /* Info.plist */,
 			);
@@ -129,6 +137,7 @@
 				18A1E7322B641FA900FE9FE3 /* ViewOwner.swift */,
 				18A1E7382B64301100FE9FE3 /* UITextField.swift */,
 				18A1E73F2B64344900FE9FE3 /* UIViewController.swift */,
+				18A1E7432B643C7000FE9FE3 /* ReusableView.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -136,6 +145,7 @@
 		18A1E7302B641A7500FE9FE3 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				18A1E7462B643C9B00FE9FE3 /* AvatarCollectionViewCell */,
 				18A1E73A2B64335400FE9FE3 /* ASTextField */,
 			);
 			path = Components;
@@ -149,6 +159,24 @@
 				18A1E73D2B64337900FE9FE3 /* ASTextFieldType.swift */,
 			);
 			path = ASTextField;
+			sourceTree = "<group>";
+		};
+		18A1E7462B643C9B00FE9FE3 /* AvatarCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				18A1E7412B643BE600FE9FE3 /* AvatarCollectionViewCell.swift */,
+				18A1E7472B643CC800FE9FE3 /* AvatarCollectionViewCellModel.swift */,
+			);
+			path = AvatarCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		18A1E7492B64518200FE9FE3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				18A1E7192B640E8400FE9FE3 /* Assets.xcassets */,
+				18A1E74A2B6451B200FE9FE3 /* Avatars.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,12 +258,16 @@
 				18A1E7352B641FF100FE9FE3 /* MenuView.swift in Sources */,
 				18A1E73E2B64337900FE9FE3 /* ASTextFieldType.swift in Sources */,
 				18A1E7332B641FA900FE9FE3 /* ViewOwner.swift in Sources */,
+				18A1E7442B643C7000FE9FE3 /* ReusableView.swift in Sources */,
+				18A1E74B2B6451B200FE9FE3 /* Avatars.swift in Sources */,
 				18A1E7392B64301100FE9FE3 /* UITextField.swift in Sources */,
 				18A1E7402B64344900FE9FE3 /* UIViewController.swift in Sources */,
+				18A1E7422B643BE600FE9FE3 /* AvatarCollectionViewCell.swift in Sources */,
 				18A1E7152B640E8100FE9FE3 /* MenuViewController.swift in Sources */,
 				18A1E73C2B64336500FE9FE3 /* ASTextFieldDelegate.swift in Sources */,
 				18A1E7372B64267400FE9FE3 /* ASTextField.swift in Sources */,
 				18A1E7112B640E8100FE9FE3 /* AppDelegate.swift in Sources */,
+				18A1E7482B643CC800FE9FE3 /* AvatarCollectionViewCellModel.swift in Sources */,
 				18A1E7132B640E8100FE9FE3 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

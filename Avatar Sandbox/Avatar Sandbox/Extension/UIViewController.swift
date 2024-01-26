@@ -10,7 +10,7 @@ import UIKit
 // MARK: - keyboard
 
 extension UIViewController {
-    public func hideKeyboardWhenTappedAround() {
+    func hideKeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(
             target: self,
             action: #selector(UIViewController.dismissKeyboardWhenTappedAround)

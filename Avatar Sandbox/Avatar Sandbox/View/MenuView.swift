@@ -16,48 +16,38 @@ final class MenuView: UIView {
         let label = UILabel()
         label.text = "Avatar Creation"
         label.font = UIFont(name: "Optima", size: 40)
-        label.textColor = .black
+        label.textColor = .white
         label.textAlignment = .center
         return label
     }()
     
-    private let characterView: UIView = {
+    private let avatarBorderView: UIView = {
         let view = UIView()
-        view.layer.borderWidth = 2
-        view.layer.borderColor = UIColor.black.cgColor
         view.layer.cornerRadius = 20
+        view.layer.borderWidth = 5
+        view.layer.borderColor = UIColor.lightGray.cgColor
         return view
-    }()
-    
-    private let ageTextField: ASTextField = {
-        let textField = ASTextField(type: .age)
-        return textField
-    }()
-    
-    private let heightTextField: ASTextField = {
-        let textField = ASTextField(type: .height)
-        return textField
-    }()
-    
-    private let weidghtTextField: ASTextField = {
-        let textField = ASTextField(type: .weight)
-        return textField
     }()
     
     private let avatarImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .orange
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
-//    private let avatarCollectionView: UICollectionView = {
-//        let collectionView = UICollectionView(
-//            frame: .zero,
-//            collectionViewLayout: UICollectionViewFlowLayout()
-//        )
-//        collectionView.register(AvatarCollectionViewCell, forCellWithReuseIdentifier: <#T##String#>)
-//        return collectionView
-//    }()
+    let avatarCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: layout
+        )
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.backgroundColor = .clear
+        collectionView.register(AvatarCollectionViewCell.self, forCellWithReuseIdentifier: AvatarCollectionViewCell.defaultReuseIdentifier)
+        collectionView.clipsToBounds = false
+        return collectionView
+    }()
     
     // MARK: - Life cycle
     
@@ -72,6 +62,20 @@ final class MenuView: UIView {
     
     // MARK: - Methods
 
+    func setupCollectionView(dataSource: UICollectionViewDataSource) {
+        avatarCollectionView.dataSource = dataSource
+    }
+    
+    func setupCollectionView(delegate: UICollectionViewDelegate) {
+        avatarCollectionView.delegate = delegate
+    }
+    
+    func refreshAvatar(with image: UIImage?) {
+        UIView.transition(with: avatarImageView, duration: 0.5, options: .transitionCrossDissolve) {
+            self.avatarImageView.image = image
+        }
+    }
+    
     private func configure() {
         configureView()
         addSubviews()
@@ -79,16 +83,14 @@ final class MenuView: UIView {
     }
     
     private func configureView() {
-        backgroundColor = .white
+        backgroundColor = .darkGray
     }
     
     private func addSubviews() {
         addSubview(titleLabel)
-        addSubview(characterView)
-        characterView.addSubview(avatarImageView)
-        characterView.addSubview(ageTextField)
-        characterView.addSubview(heightTextField)
-        characterView.addSubview(weidghtTextField)
+        addSubview(avatarBorderView)
+        avatarBorderView.addSubview(avatarImageView)
+        addSubview(avatarCollectionView)
     }
     
     private func setupConstraints() {
@@ -97,33 +99,20 @@ final class MenuView: UIView {
             make.leading.trailing.equalToSuperview().inset(15)
         }
         
-        characterView.snp.makeConstraints { make in
+        avatarBorderView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(30)
-            make.leading.trailing.equalToSuperview().inset(15)
+            make.trailing.leading.equalToSuperview().inset(30)
+            make.height.equalTo(avatarImageView.snp.width)
         }
         
         avatarImageView.snp.makeConstraints { make in
-            make.top.trailing.equalToSuperview().inset(30)
-            make.height.width.equalTo(120)
-            make.bottom.lessThanOrEqualTo(characterView.snp.bottom).inset(30)
+            make.edges.equalToSuperview().inset(20)
         }
-        
-        ageTextField.snp.makeConstraints { make in
-            make.leading.top.equalToSuperview().inset(30)
-            make.trailing.lessThanOrEqualTo(avatarImageView.snp.leading).offset(30)
-        }
-        
-        heightTextField.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(30)
-            make.top.equalTo(ageTextField.snp.bottom).offset(10)
-            make.trailing.equalTo(ageTextField)
-        }
-        
-        weidghtTextField.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(30)
-            make.top.equalTo(heightTextField.snp.bottom).offset(10)
-            make.bottom.lessThanOrEqualTo(characterView.snp.bottom).inset(30)
-            make.trailing.equalTo(ageTextField)
+
+        avatarCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(avatarBorderView.snp.bottom).offset(30)
+            make.leading.trailing.equalToSuperview().inset(30)
+            make.height.equalTo(100)
         }
     }
 }
