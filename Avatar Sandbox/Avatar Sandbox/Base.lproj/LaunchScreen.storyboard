@@ -17,8 +17,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avatar Sandbox" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HZz-CQ-Qp6">
-                                <rect key="frame" x="29.333333333333343" y="411.33333333333331" width="334.33333333333326" height="54.333333333333314"/>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="50"/>
+                                <rect key="frame" x="29" y="408.66666666666669" width="335.33333333333331" height="59.666666666666686"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="50"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
