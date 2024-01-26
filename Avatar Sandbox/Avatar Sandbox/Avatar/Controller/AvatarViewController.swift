@@ -1,5 +1,5 @@
 //
-//  MenuViewController.swift
+//  AvatarViewController.swift
 //  Avatar Sandbox
 //
 //  Created by Anton Kasaryn on 26.01.24.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class MenuViewController: UIViewController, ViewOwner {
-    typealias RootView = MenuView
+final class AvatarViewController: UIViewController, ViewOwner {
+    typealias RootView = AvatarView
 
     // MARK: - Properties
     
@@ -20,7 +20,7 @@ final class MenuViewController: UIViewController, ViewOwner {
     // MARK: - Life cycle
     
     override func loadView() {
-        view = MenuView()
+        view = AvatarView()
         rootView.setupCollectionView(dataSource: self)
         rootView.setupCollectionView(delegate: self)
     }
@@ -30,6 +30,14 @@ final class MenuViewController: UIViewController, ViewOwner {
         hideKeyboardWhenTappedAround()
     }
 
+    // MARK: - @Objc methods
+    
+    @objc private func nextButtonDidTap() {
+        rootView.animateTransition {
+            self.navigationController?.pushViewController(CharacterViewController(), animated: true)
+        }
+    }
+    
     // MARK: - Methods
     
     private func selectMiddleCell() {
@@ -47,7 +55,7 @@ final class MenuViewController: UIViewController, ViewOwner {
 
 // MARK: - UICollectionViewDelegate
 
-extension MenuViewController: UICollectionViewDelegate {
+extension AvatarViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
         rootView.refreshAvatar(with: models[indexPath.row].value)
@@ -66,7 +74,7 @@ extension MenuViewController: UICollectionViewDelegate {
 
 // MARK: - UICollectionViewDataSource
 
-extension MenuViewController: UICollectionViewDataSource {
+extension AvatarViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         models.count
     }
@@ -88,7 +96,7 @@ extension MenuViewController: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
-extension MenuViewController: UICollectionViewDelegateFlowLayout {
+extension AvatarViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,

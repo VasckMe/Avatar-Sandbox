@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		18A1E7112B640E8100FE9FE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7102B640E8100FE9FE3 /* AppDelegate.swift */; };
 		18A1E7132B640E8100FE9FE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7122B640E8100FE9FE3 /* SceneDelegate.swift */; };
-		18A1E7152B640E8100FE9FE3 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7142B640E8100FE9FE3 /* MenuViewController.swift */; };
+		18A1E7152B640E8100FE9FE3 /* AvatarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7142B640E8100FE9FE3 /* AvatarViewController.swift */; };
 		18A1E71A2B640E8400FE9FE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18A1E7192B640E8400FE9FE3 /* Assets.xcassets */; };
 		18A1E71D2B640E8400FE9FE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18A1E71B2B640E8400FE9FE3 /* LaunchScreen.storyboard */; };
 		18A1E7262B6412F900FE9FE3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18A1E7252B6412F900FE9FE3 /* SnapKit */; };
 		18A1E7332B641FA900FE9FE3 /* ViewOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7322B641FA900FE9FE3 /* ViewOwner.swift */; };
-		18A1E7352B641FF100FE9FE3 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7342B641FF100FE9FE3 /* MenuView.swift */; };
+		18A1E7352B641FF100FE9FE3 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7342B641FF100FE9FE3 /* AvatarView.swift */; };
 		18A1E7372B64267400FE9FE3 /* ASTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7362B64267400FE9FE3 /* ASTextField.swift */; };
 		18A1E7392B64301100FE9FE3 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7382B64301100FE9FE3 /* UITextField.swift */; };
 		18A1E73C2B64336500FE9FE3 /* ASTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E73B2B64336500FE9FE3 /* ASTextFieldDelegate.swift */; };
@@ -24,18 +24,20 @@
 		18A1E7442B643C7000FE9FE3 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7432B643C7000FE9FE3 /* ReusableView.swift */; };
 		18A1E7482B643CC800FE9FE3 /* AvatarCollectionViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7472B643CC800FE9FE3 /* AvatarCollectionViewCellModel.swift */; };
 		18A1E74B2B6451B200FE9FE3 /* Avatars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E74A2B6451B200FE9FE3 /* Avatars.swift */; };
+		18A1E74F2B646EB400FE9FE3 /* CharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E74E2B646EB400FE9FE3 /* CharacterViewController.swift */; };
+		18A1E7512B646EC600FE9FE3 /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7502B646EC600FE9FE3 /* CharacterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		18A1E70D2B640E8100FE9FE3 /* Avatar Sandbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Avatar Sandbox.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18A1E7102B640E8100FE9FE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18A1E7122B640E8100FE9FE3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		18A1E7142B640E8100FE9FE3 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		18A1E7142B640E8100FE9FE3 /* AvatarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarViewController.swift; sourceTree = "<group>"; };
 		18A1E7192B640E8400FE9FE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18A1E71C2B640E8400FE9FE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18A1E71E2B640E8400FE9FE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18A1E7322B641FA900FE9FE3 /* ViewOwner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOwner.swift; sourceTree = "<group>"; };
-		18A1E7342B641FF100FE9FE3 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		18A1E7342B641FF100FE9FE3 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		18A1E7362B64267400FE9FE3 /* ASTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASTextField.swift; sourceTree = "<group>"; };
 		18A1E7382B64301100FE9FE3 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		18A1E73B2B64336500FE9FE3 /* ASTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASTextFieldDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +47,8 @@
 		18A1E7432B643C7000FE9FE3 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		18A1E7472B643CC800FE9FE3 /* AvatarCollectionViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCollectionViewCellModel.swift; sourceTree = "<group>"; };
 		18A1E74A2B6451B200FE9FE3 /* Avatars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatars.swift; sourceTree = "<group>"; };
+		18A1E74E2B646EB400FE9FE3 /* CharacterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewController.swift; sourceTree = "<group>"; };
+		18A1E7502B646EC600FE9FE3 /* CharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +96,7 @@
 		18A1E7282B64197900FE9FE3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				18A1E7142B640E8100FE9FE3 /* MenuViewController.swift */,
+				18A1E7142B640E8100FE9FE3 /* AvatarViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -100,7 +104,7 @@
 		18A1E7292B64198E00FE9FE3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				18A1E7342B641FF100FE9FE3 /* MenuView.swift */,
+				18A1E7342B641FF100FE9FE3 /* AvatarView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -124,9 +128,8 @@
 		18A1E72E2B641A5300FE9FE3 /* Module */ = {
 			isa = PBXGroup;
 			children = (
-				18A1E72A2B64199500FE9FE3 /* Model */,
-				18A1E7292B64198E00FE9FE3 /* View */,
-				18A1E7282B64197900FE9FE3 /* Controller */,
+				18A1E74D2B646E9D00FE9FE3 /* Character */,
+				18A1E74C2B646E6400FE9FE3 /* Avatar */,
 			);
 			name = Module;
 			sourceTree = "<group>";
@@ -177,6 +180,25 @@
 				18A1E74A2B6451B200FE9FE3 /* Avatars.swift */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		18A1E74C2B646E6400FE9FE3 /* Avatar */ = {
+			isa = PBXGroup;
+			children = (
+				18A1E72A2B64199500FE9FE3 /* Model */,
+				18A1E7292B64198E00FE9FE3 /* View */,
+				18A1E7282B64197900FE9FE3 /* Controller */,
+			);
+			path = Avatar;
+			sourceTree = "<group>";
+		};
+		18A1E74D2B646E9D00FE9FE3 /* Character */ = {
+			isa = PBXGroup;
+			children = (
+				18A1E74E2B646EB400FE9FE3 /* CharacterViewController.swift */,
+				18A1E7502B646EC600FE9FE3 /* CharacterView.swift */,
+			);
+			path = Character;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,15 +277,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18A1E7352B641FF100FE9FE3 /* MenuView.swift in Sources */,
+				18A1E7352B641FF100FE9FE3 /* AvatarView.swift in Sources */,
 				18A1E73E2B64337900FE9FE3 /* ASTextFieldType.swift in Sources */,
 				18A1E7332B641FA900FE9FE3 /* ViewOwner.swift in Sources */,
 				18A1E7442B643C7000FE9FE3 /* ReusableView.swift in Sources */,
 				18A1E74B2B6451B200FE9FE3 /* Avatars.swift in Sources */,
 				18A1E7392B64301100FE9FE3 /* UITextField.swift in Sources */,
+				18A1E7512B646EC600FE9FE3 /* CharacterView.swift in Sources */,
+				18A1E74F2B646EB400FE9FE3 /* CharacterViewController.swift in Sources */,
 				18A1E7402B64344900FE9FE3 /* UIViewController.swift in Sources */,
 				18A1E7422B643BE600FE9FE3 /* AvatarCollectionViewCell.swift in Sources */,
-				18A1E7152B640E8100FE9FE3 /* MenuViewController.swift in Sources */,
+				18A1E7152B640E8100FE9FE3 /* AvatarViewController.swift in Sources */,
 				18A1E73C2B64336500FE9FE3 /* ASTextFieldDelegate.swift in Sources */,
 				18A1E7372B64267400FE9FE3 /* ASTextField.swift in Sources */,
 				18A1E7112B640E8100FE9FE3 /* AppDelegate.swift in Sources */,
