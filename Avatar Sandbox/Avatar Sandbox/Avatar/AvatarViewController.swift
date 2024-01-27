@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WatchConnectivity
 
 final class AvatarViewController: UIViewController, ViewOwner {
     typealias RootView = AvatarView
@@ -23,6 +24,8 @@ final class AvatarViewController: UIViewController, ViewOwner {
     
     private let validationService: ASValidationServiceProtocol = ASValidationService()
     
+    var lastMessage: CFAbsoluteTime = 0
+    
     // MARK: - Life cycle
     
     override func loadView() {
@@ -35,9 +38,16 @@ final class AvatarViewController: UIViewController, ViewOwner {
     override func viewDidLoad() {
         super.viewDidLoad()
         hideKeyboardWhenTappedAround()
+        
+        if (WCSession.isSupported()) {
+            let session = WCSession.default
+            session.delegate = self
+            session.activate()
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        sendWatchMessage()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -173,5 +183,53 @@ extension AvatarViewController: ASInputViewDelegate {
         }
         
         // if all valid - enable button
+    }
+}
+
+extension AvatarViewController: WCSessionDelegate {
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        print("session")
+        if let error = error {
+            print("Can't active session: ",error.localizedDescription)
+        } else {
+            print("Can activate session")
+        }
+    }
+
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        print("didBecomeInactive")
+    }
+
+    func sessionDidDeactivate(_ session: WCSession) {
+        print("didDeactivate")
+        WCSession.default.activate()
+    }
+    
+    func sendWatchMessage() {
+        let currentTime = CFAbsoluteTimeGetCurrent()
+
+        // if less than half a second has passed, bail out
+        if lastMessage + 0.5 > currentTime {
+            return
+        }
+
+        // send a message to the watch if it's reachable
+        if (WCSession.default.isReachable) {
+            // this is a meaningless message, but it's enough for our purposes
+//            let model = CharacterModel(image: ASImage.avatar10.value!, age: 49, height: 14, weight: 29)
+            let message = ["age":49, "height":14, "weight":29] as [String : Any]
+            WCSession.default.sendMessage(message, replyHandler: nil)
+            WCSession.default.sendMessageData(ASImage.avatar10.value!.pngData()!, replyHandler: nil)
+//                           UIImage
+        }
+
+        // update our rate limiting property
+        lastMessage = CFAbsoluteTimeGetCurrent()
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+
+        sendWatchMessage()
     }
 }

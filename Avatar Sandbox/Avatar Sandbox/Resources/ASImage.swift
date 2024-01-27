@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum ASImage: String, CaseIterable {
+public enum ASImage: String, CaseIterable {
     case avatar2
     case avatar3
     case avatar5
