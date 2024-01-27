@@ -92,9 +92,10 @@ class SessionDelegater: NSObject, WCSessionDelegate {
 
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         DispatchQueue.main.async {
-            let age = message["age"] as! Int
-            let height = message["height"] as! Int
-            let weight = message["weight"] as! Int
+            let age = Int(message["age"] as! String)!
+            let height = Int(message["height"] as! String)!
+            let weight = Int(message["weight"] as! String)!
+
             self.ageSubject.send(age)
             self.heightSubject.send(height)
             self.weightSubject.send(weight)

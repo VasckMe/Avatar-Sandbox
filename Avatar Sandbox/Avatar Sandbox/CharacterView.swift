@@ -1,5 +1,5 @@
 //
-//  AvatarView.swift
+//  CharacterView.swift
 //  Avatar Sandbox
 //
 //  Created by Anton Kasaryn on 26.01.24.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class AvatarView: UIView {
+final class CharacterView: UIView {
 
     // MARK: - Outlets
     
@@ -77,14 +77,16 @@ final class AvatarView: UIView {
     
     private let continueButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Next", for: .normal)
+        button.setTitle("Create", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.setTitleColor(.gray, for: .highlighted)
+        button.setTitleColor(UIColor(named: "Disabled"), for: .disabled)
         button.backgroundColor = .darkGray
         button.layer.cornerRadius = 10
         button.layer.borderColor = UIColor.gray.cgColor
         button.layer.borderWidth = 2
         button.addTarget(nil, action: Selector(("nextButtonDidTap")), for: .touchUpInside)
+        button.isEnabled = false
         return button
     }()
     
@@ -140,6 +142,21 @@ final class AvatarView: UIView {
     func contentDown() {
         bounds.size.height -= bottomInset
         bottomInset = 0
+    }
+    
+    func getModel() -> CharacterModel? {
+        guard let image = avatarImageView.image else {
+            return nil
+        }
+        let age = ageInputView.getText()
+        let height = heightInputView.getText()
+        let weight = weightInputView.getText()
+        
+        return CharacterModel(age: age, height: height, weight: weight, image: image)
+    }
+    
+    func disabledButton(enable: Bool) {
+        continueButton.isEnabled = enable
     }
     
     func setupInputViews(delegate: ASInputViewDelegate) {
@@ -225,24 +242,14 @@ final class AvatarView: UIView {
         inputContainer.snp.makeConstraints { make in
             make.top.equalTo(avatarCollectionView.snp.bottom).offset(30)
             make.leading.trailing.equalToSuperview().inset(30)
-            make.bottom.lessThanOrEqualTo(layoutMarginsGuide)
         }
         
-//        heightInputView.snp.makeConstraints { make in
-//            make.top.equalTo(ageInputView.snp.bottom).offset(10)
-//            make.leading.trailing.equalToSuperview().inset(30)
-//        }
-//
-//        weightInputView.snp.makeConstraints { make in
-//            make.top.equalTo(heightInputView.snp.bottom).offset(10)
-//            make.leading.trailing.equalToSuperview().inset(30)
-//        }
-        
-//        continueButton.snp.makeConstraints { make in
-//            make.top.equalTo(avatarCollectionView.snp.bottom).offset(30)
-//            make.centerX.equalToSuperview()
-//            make.width.equalTo(150)
-//            make.height.equalTo(40)
-//        }
+        continueButton.snp.makeConstraints { make in
+            make.top.equalTo(inputContainer.snp.bottom).offset(30)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(150)
+            make.height.equalTo(40)
+            make.bottom.lessThanOrEqualTo(layoutMarginsGuide)
+        }
     }
 }

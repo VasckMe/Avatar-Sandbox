@@ -130,6 +130,10 @@ final class ASInputView: UIView {
         }
     }
     
+    public func getText() -> String {
+        return textField.text ?? ""
+    }
+    
     private func configure() {
         configureTextField()
         addSubviews()
@@ -172,6 +176,7 @@ extension ASInputView: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let value = (Float(textField.text!) ?? 0) / 100
         slider.setValue(value, animated: true)
+        delegate?.didTriggerTextField(of: type, with: textField.text)
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {

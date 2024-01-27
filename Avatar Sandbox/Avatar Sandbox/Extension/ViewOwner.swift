@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - ViewOwner
+
 protocol ViewOwner: AnyObject {
     associatedtype RootView: UIView
 }

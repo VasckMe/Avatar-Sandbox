@@ -1,5 +1,5 @@
 //
-//  AvatarViewController.swift
+//  CharacterViewController.swift
 //  Avatar Sandbox
 //
 //  Created by Anton Kasaryn on 26.01.24.
@@ -8,8 +8,8 @@
 import UIKit
 import WatchConnectivity
 
-final class AvatarViewController: UIViewController, ViewOwner {
-    typealias RootView = AvatarView
+final class CharacterViewController: UIViewController, ViewOwner {
+    typealias RootView = CharacterView
 
     // MARK: - Properties
     
@@ -18,9 +18,9 @@ final class AvatarViewController: UIViewController, ViewOwner {
     private let cellSize: CGSize = CGSize(width: 100, height: 100)
     private let lineSpacing: CGFloat = 20
     
-    private var isAgeValid = true
-    private var isHeightValid = true
-    private var isWeightValid = true
+    private var isAgeValid = false
+    private var isHeightValid = false
+    private var isWeightValid = false
     
     private let validationService: ASValidationServiceProtocol = ASValidationService()
     
@@ -29,7 +29,7 @@ final class AvatarViewController: UIViewController, ViewOwner {
     // MARK: - Life cycle
     
     override func loadView() {
-        view = AvatarView()
+        view = CharacterView()
         rootView.setupCollectionView(dataSource: self)
         rootView.setupCollectionView(delegate: self)
         rootView.setupInputViews(delegate: self)
@@ -47,7 +47,6 @@ final class AvatarViewController: UIViewController, ViewOwner {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        sendWatchMessage()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -77,9 +76,11 @@ final class AvatarViewController: UIViewController, ViewOwner {
     // MARK: - @Objc methods
     
     @objc private func nextButtonDidTap() {
-        rootView.animateTransition {
-//            self.navigationController?.pushViewController(CharacterViewController(), animated: true)
+        guard let model = rootView.getModel() else {
+            showAlert(title: "Choose avatar")
+            return
         }
+        sendWatchMessage(model: model)
     }
     
     // MARK: - Methods
@@ -95,11 +96,29 @@ final class AvatarViewController: UIViewController, ViewOwner {
             rootView.refreshAvatar(with: models[safe: indexPath.row])
         }
     }
+    
+    private func sendWatchMessage(model: CharacterModel) {
+        let currentTime = CFAbsoluteTimeGetCurrent()
+
+        if lastMessage + 0.5 > currentTime {
+            return
+        }
+
+        if (WCSession.default.isReachable) {
+            let message = ["age": model.age, "height": model.height, "weight": model.weight] as [String : Any]
+            WCSession.default.sendMessage(message, replyHandler: nil)
+            WCSession.default.sendMessageData(model.image.pngData()!, replyHandler: nil)
+        } else {
+            showAlert(title: "Error", message: "Apple Watch is not reachable")
+        }
+
+        lastMessage = CFAbsoluteTimeGetCurrent()
+    }
 }
 
 // MARK: - UICollectionViewDelegate
 
-extension AvatarViewController: UICollectionViewDelegate {
+extension CharacterViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
         rootView.refreshAvatar(with: models[safe: indexPath.row])
@@ -118,7 +137,7 @@ extension AvatarViewController: UICollectionViewDelegate {
 
 // MARK: - UICollectionViewDataSource
 
-extension AvatarViewController: UICollectionViewDataSource {
+extension CharacterViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         models.count
     }
@@ -140,7 +159,7 @@ extension AvatarViewController: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
-extension AvatarViewController: UICollectionViewDelegateFlowLayout {
+extension CharacterViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
@@ -168,7 +187,7 @@ extension AvatarViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - ASInputViewDelegate
 
-extension AvatarViewController: ASInputViewDelegate {
+extension CharacterViewController: ASInputViewDelegate {
     func didTriggerTextField(of type: ASInputViewType, with text: String?) {
         let isValid = validationService.isValid(text: text)
         rootView.validate(type: type, isValid: isValid)
@@ -182,11 +201,13 @@ extension AvatarViewController: ASInputViewDelegate {
             isWeightValid = isValid
         }
         
-        // if all valid - enable button
+        rootView.disabledButton(enable: isAgeValid && isWeightValid && isHeightValid)
     }
 }
 
-extension AvatarViewController: WCSessionDelegate {
+// MARK: - WCSessionDelegate
+
+extension CharacterViewController: WCSessionDelegate {
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         print("session")
         if let error = error {
@@ -203,21 +224,5 @@ extension AvatarViewController: WCSessionDelegate {
     func sessionDidDeactivate(_ session: WCSession) {
         print("didDeactivate")
         WCSession.default.activate()
-    }
-    
-    func sendWatchMessage() {
-        let currentTime = CFAbsoluteTimeGetCurrent()
-
-        if lastMessage + 0.5 > currentTime {
-            return
-        }
-
-        if (WCSession.default.isReachable) {
-            let message = ["age":49, "height":14, "weight":29] as [String : Any]
-            WCSession.default.sendMessage(message, replyHandler: nil)
-            WCSession.default.sendMessageData(ASImage.avatar10.value!.pngData()!, replyHandler: nil)
-        }
-
-        lastMessage = CFAbsoluteTimeGetCurrent()
     }
 }
