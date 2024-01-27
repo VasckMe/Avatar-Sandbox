@@ -49,6 +49,32 @@ final class AvatarView: UIView {
         return collectionView
     }()
     
+    private let inputContainer: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.distribution = .fillEqually
+        return stackView
+    }()
+    
+    private let ageInputView: ASInputView = {
+        let textField = ASInputView(type: .age)
+        textField.setText("0")
+        return textField
+    }()
+    
+    private let heightInputView: ASInputView = {
+        let textField = ASInputView(type: .height)
+        textField.setText("0")
+        return textField
+    }()
+    
+    private let weightInputView: ASInputView = {
+        let textField = ASInputView(type: .weight)
+        textField.setText("0")
+        return textField
+    }()
+    
     private let continueButton: UIButton = {
         let button = UIButton()
         button.setTitle("Next", for: .normal)
@@ -61,6 +87,10 @@ final class AvatarView: UIView {
         button.addTarget(nil, action: Selector(("nextButtonDidTap")), for: .touchUpInside)
         return button
     }()
+    
+    // MARK: - Properties
+    
+    var bottomInset: CGFloat = 0
     
     // MARK: - Life cycle
     
@@ -83,10 +113,39 @@ final class AvatarView: UIView {
         avatarCollectionView.delegate = delegate
     }
     
-    func refreshAvatar(with image: UIImage?) {
+    func refreshAvatar(with image: ASImage?) {
         UIView.transition(with: avatarImageView, duration: 0.5, options: .transitionCrossDissolve) {
-            self.avatarImageView.image = image
+            self.avatarImageView.image = image?.value
         }
+    }
+    
+    func contentUp(constant: CGFloat) {
+        if bottomInset == 0 {
+            bottomInset = bounds.height - inputContainer.frame.maxY + constant
+            bounds.size.height += bottomInset
+        }
+    }
+    
+    func validate(type: ASInputViewType, isValid: Bool) {
+        switch type {
+        case .age:
+            ageInputView.validate(isValid: isValid)
+        case .height:
+            heightInputView.validate(isValid: isValid)
+        case .weight:
+            weightInputView.validate(isValid: isValid)
+        }
+    }
+    
+    func contentDown() {
+        bounds.size.height -= bottomInset
+        bottomInset = 0
+    }
+    
+    func setupInputViews(delegate: ASInputViewDelegate) {
+        ageInputView.delegate = delegate
+        heightInputView.delegate = delegate
+        weightInputView.delegate = delegate
     }
     
     func animateTransition(completion: @escaping () -> ()) {
@@ -134,6 +193,10 @@ final class AvatarView: UIView {
         addSubview(avatarBorderView)
         avatarBorderView.addSubview(avatarImageView)
         addSubview(avatarCollectionView)
+        addSubview(inputContainer)
+        inputContainer.addArrangedSubview(ageInputView)
+        inputContainer.addArrangedSubview(heightInputView)
+        inputContainer.addArrangedSubview(weightInputView)
         addSubview(continueButton)
     }
     
@@ -159,11 +222,27 @@ final class AvatarView: UIView {
             make.height.equalTo(100)
         }
         
-        continueButton.snp.makeConstraints { make in
+        inputContainer.snp.makeConstraints { make in
             make.top.equalTo(avatarCollectionView.snp.bottom).offset(30)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(150)
-            make.height.equalTo(40)
+            make.leading.trailing.equalToSuperview().inset(30)
+            make.bottom.lessThanOrEqualTo(layoutMarginsGuide)
         }
+        
+//        heightInputView.snp.makeConstraints { make in
+//            make.top.equalTo(ageInputView.snp.bottom).offset(10)
+//            make.leading.trailing.equalToSuperview().inset(30)
+//        }
+//
+//        weightInputView.snp.makeConstraints { make in
+//            make.top.equalTo(heightInputView.snp.bottom).offset(10)
+//            make.leading.trailing.equalToSuperview().inset(30)
+//        }
+        
+//        continueButton.snp.makeConstraints { make in
+//            make.top.equalTo(avatarCollectionView.snp.bottom).offset(30)
+//            make.centerX.equalToSuperview()
+//            make.width.equalTo(150)
+//            make.height.equalTo(40)
+//        }
     }
 }

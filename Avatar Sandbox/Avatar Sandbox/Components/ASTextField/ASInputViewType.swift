@@ -1,11 +1,11 @@
 //
-//  ASTextFieldType.swift
+//  ASInputViewType.swift
 //  Avatar Sandbox
 //
 //  Created by Anton Kasaryn on 26.01.24.
 //
 
-enum ASTextFieldType: String {
+enum ASInputViewType: String {
     case age = "Age"
     case height = "Height"
     case weight = "Weight"

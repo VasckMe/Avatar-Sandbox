@@ -12,10 +12,16 @@ final class AvatarViewController: UIViewController, ViewOwner {
 
     // MARK: - Properties
     
-    let models = Avatars.allCases
-    let cellSpacing: CGFloat = 10
-    let cellSize: CGSize = CGSize(width: 100, height: 100)
-    let lineSpacing: CGFloat = 20
+    private let models = ASImage.allCases
+    private let cellSpacing: CGFloat = 10
+    private let cellSize: CGSize = CGSize(width: 100, height: 100)
+    private let lineSpacing: CGFloat = 20
+    
+    private var isAgeValid = true
+    private var isHeightValid = true
+    private var isWeightValid = true
+    
+    private let validationService: ASValidationServiceProtocol = ASValidationService()
     
     // MARK: - Life cycle
     
@@ -23,18 +29,46 @@ final class AvatarViewController: UIViewController, ViewOwner {
         view = AvatarView()
         rootView.setupCollectionView(dataSource: self)
         rootView.setupCollectionView(delegate: self)
+        rootView.setupInputViews(delegate: self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         hideKeyboardWhenTappedAround()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            rootView.contentUp(constant: keyboardSize.height)
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
 
+    @objc func keyboardWillHide(_ notification: Notification) {
+        rootView.contentDown()
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
     // MARK: - @Objc methods
     
     @objc private func nextButtonDidTap() {
         rootView.animateTransition {
-            self.navigationController?.pushViewController(CharacterViewController(), animated: true)
+//            self.navigationController?.pushViewController(CharacterViewController(), animated: true)
         }
     }
     
@@ -48,7 +82,7 @@ final class AvatarViewController: UIViewController, ViewOwner {
 
         if let indexPath = rootView.avatarCollectionView.indexPathForItem(at: centerPoint) {
             rootView.avatarCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
-            rootView.refreshAvatar(with: models[indexPath.row].value)
+            rootView.refreshAvatar(with: models[safe: indexPath.row])
         }
     }
 }
@@ -58,7 +92,7 @@ final class AvatarViewController: UIViewController, ViewOwner {
 extension AvatarViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
-        rootView.refreshAvatar(with: models[indexPath.row].value)
+        rootView.refreshAvatar(with: models[safe: indexPath.row])
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -89,7 +123,7 @@ extension AvatarViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        cell.setup(model: models[indexPath.row])
+        cell.setup(image: models[safe: indexPath.row])
         return cell
     }
 }
@@ -122,6 +156,22 @@ extension AvatarViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-protocol AvatarCollectionViewCellDelegate: AnyObject {
-    func didSelect(cell: AvatarCollectionViewCell)
+// MARK: - ASInputViewDelegate
+
+extension AvatarViewController: ASInputViewDelegate {
+    func didTriggerTextField(of type: ASInputViewType, with text: String?) {
+        let isValid = validationService.isValid(text: text)
+        rootView.validate(type: type, isValid: isValid)
+        
+        switch type {
+        case .age:
+            isAgeValid = isValid
+        case .height:
+            isHeightValid = isValid
+        case .weight:
+            isWeightValid = isValid
+        }
+        
+        // if all valid - enable button
+    }
 }

@@ -1,5 +1,5 @@
 //
-//  Avatars.swift
+//  ASImage.swift
 //  Avatar Sandbox
 //
 //  Created by Anton Kasaryn on 26.01.24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum Avatars: String, CaseIterable {
+enum ASImage: String, CaseIterable {
     case avatar2
     case avatar3
     case avatar5

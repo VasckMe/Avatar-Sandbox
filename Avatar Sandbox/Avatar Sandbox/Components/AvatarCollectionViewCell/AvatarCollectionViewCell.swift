@@ -33,11 +33,7 @@ final class AvatarCollectionViewCell: UICollectionViewCell, ReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        contentView.addSubview(avatarImageView)
-        avatarImageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(10)
-        }
-        contentView.layer.cornerRadius = 20
+        configure()
     }
     
     required init?(coder: NSCoder) {
@@ -46,8 +42,28 @@ final class AvatarCollectionViewCell: UICollectionViewCell, ReusableView {
     
     // MARK: - Methods
     
-    func setup(model: Avatars) {
-        avatarImageView.image = model.value
+    func setup(image: ASImage?) {
+        avatarImageView.image = image?.value
+    }
+    
+    private func configure() {
+        configureView()
+        addSubviews()
+        setupConstraints()
+    }
+    
+    private func configureView() {
+        contentView.layer.cornerRadius = 20
+    }
+    
+    private func addSubviews() {
+        contentView.addSubview(avatarImageView)
+    }
+    
+    private func setupConstraints() {
+        avatarImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(10)
+        }
     }
 }
 
