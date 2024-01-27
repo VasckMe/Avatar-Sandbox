@@ -34,11 +34,10 @@ struct CharacterStatsView: View {
 
 struct ContentView: View {
 
-    @StateObject var counter = Counter()
+    @StateObject var model = Model()
 
     var body: some View {
         ZStack {
-//            Color(.white)
             VStack {
                 ZStack {
                     Circle()
@@ -46,33 +45,16 @@ struct ContentView: View {
                         .overlay(Circle().stroke(Color.white, lineWidth: 5))
                         .shadow(color: .black, radius: 5)
                         .frame(width: 100, height: 100)
-                    Image(uiImage: counter.model?.image ?? UIImage())
+                    Image(uiImage: model.image)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 70, height: 70)
                 }
                 CharacterStatsView(
-                    age: counter.model?.age ?? 0,
-                    height: counter.model?.age ?? 0,
-                    weight: counter.model?.age ?? 0
+                    age: model.age,
+                    height: model.height,
+                    weight: model.weight
                 )
-//                    Color(.purple)
-                //            Text("\(counter.count)")
-                //                .font(.largeTitle)
-                
-                //            HStack {
-                //                Button(action: counter.decrement) {
-                //                    Label("Decrement", systemImage: "minus.circle")
-                //                }
-                //                .padding()
-                //
-                //                Button(action: counter.increment) {
-                //                    Label("Increment", systemImage: "plus.circle.fill")
-                //                }
-                //                .padding()
-                //            }
-                //            .font(.headline)
-                //            .labelStyle(labelStyle)
             }
         }
     }
@@ -84,13 +66,22 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-class SessionDelegater: NSObject, WCSessionDelegate {
-    let countSubject: PassthroughSubject<Int, Never>
-    let countSubj: PassthroughSubject<CharacterModel?, Never>
+class SessionDelegater: NSObject, WCSessionDelegate {    
+    let ageSubject: PassthroughSubject<Int, Never>
+    let heightSubject: PassthroughSubject<Int, Never>
+    let weightSubject: PassthroughSubject<Int, Never>
+    let imageSubject: PassthroughSubject<UIImage, Never>
     
-    init(countSubject: PassthroughSubject<Int, Never>, countSubj: PassthroughSubject<CharacterModel?, Never>) {
-        self.countSubject = countSubject
-        self.countSubj = countSubj
+    init(
+        ageSubject: PassthroughSubject<Int, Never>,
+        heightSubject: PassthroughSubject<Int, Never>,
+        weightSubject: PassthroughSubject<Int, Never>,
+        imageSubject: PassthroughSubject<UIImage, Never>
+    ) {
+        self.ageSubject = ageSubject
+        self.heightSubject = heightSubject
+        self.weightSubject = weightSubject
+        self.imageSubject = imageSubject
         super.init()
     }
     
@@ -101,9 +92,12 @@ class SessionDelegater: NSObject, WCSessionDelegate {
 
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         DispatchQueue.main.async {
-            let model = message["model"] as? CharacterModel
-            self.countSubj.send(model)
-//            print(message["message"] as? String)
+            let age = message["age"] as! Int
+            let height = message["height"] as! Int
+            let weight = message["weight"] as! Int
+            self.ageSubject.send(age)
+            self.heightSubject.send(height)
+            self.weightSubject.send(weight)
 //            if let count = message["message"] as? Int {
 //                self.countSubject.send(count)
 //            } else {
@@ -113,7 +107,10 @@ class SessionDelegater: NSObject, WCSessionDelegate {
     }
     
     func session(_ session: WCSession, didReceiveMessageData messageData: Data) {
-        print("receiving data")
+        DispatchQueue.main.async {
+            let image = UIImage(data: messageData)!
+            self.imageSubject.send(image)
+        }
     }
     
     // iOS Protocol comformance
@@ -137,47 +134,38 @@ class SessionDelegater: NSObject, WCSessionDelegate {
 import Combine
 import WatchConnectivity
 
-public struct CharacterModel {
-    let image: UIImage
-    let age: Int
-    let height: Int
-    let weight: Int
-}
-
-final class Counter: ObservableObject {
+final class Model: ObservableObject {
     var session: WCSession
     let delegate: WCSessionDelegate
+        
+    let ageSubject = PassthroughSubject<Int, Never>()
+    let heightSubject = PassthroughSubject<Int, Never>()
+    let weightSubject = PassthroughSubject<Int, Never>()
+    let imageSubject = PassthroughSubject<UIImage, Never>()
     
-    let subj = PassthroughSubject<CharacterModel?, Never>()
-    let subject = PassthroughSubject<Int, Never>()
-    
-    @Published private(set) var model: CharacterModel?
-    @Published private(set) var count: Int = 0
+    @Published private(set) var age: Int = 0
+    @Published private(set) var height: Int = 0
+    @Published private(set) var weight: Int = 0
+    @Published private(set) var image: UIImage = UIImage()
     
     init(session: WCSession = .default) {
-        self.delegate = SessionDelegater(countSubject: subject, countSubj: subj)
+        self.delegate = SessionDelegater(
+            ageSubject: ageSubject,
+            heightSubject: heightSubject,
+            weightSubject: weightSubject,
+            imageSubject: imageSubject
+        )
         self.session = session
         self.session.delegate = self.delegate
         self.session.activate()
         
-        subject
-            .receive(on: DispatchQueue.main)
-            .assign(to: &$count)
-        subj
-            .assign(to: &$model)
-    }
-    
-    func increment() {
-        count += 1
-        session.sendMessage(["count": count], replyHandler: nil) { error in
-            print(error.localizedDescription)
-        }
-    }
-    
-    func decrement() {
-        count -= 1
-        session.sendMessage(["count": count], replyHandler: nil) { error in
-            print(error.localizedDescription)
-        }
+        ageSubject
+            .assign(to: &$age)
+        heightSubject
+            .assign(to: &$height)
+        weightSubject
+            .assign(to: &$weight)
+        imageSubject
+            .assign(to: &$image)
     }
 }

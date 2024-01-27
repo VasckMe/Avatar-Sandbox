@@ -208,28 +208,16 @@ extension AvatarViewController: WCSessionDelegate {
     func sendWatchMessage() {
         let currentTime = CFAbsoluteTimeGetCurrent()
 
-        // if less than half a second has passed, bail out
         if lastMessage + 0.5 > currentTime {
             return
         }
 
-        // send a message to the watch if it's reachable
         if (WCSession.default.isReachable) {
-            // this is a meaningless message, but it's enough for our purposes
-//            let model = CharacterModel(image: ASImage.avatar10.value!, age: 49, height: 14, weight: 29)
             let message = ["age":49, "height":14, "weight":29] as [String : Any]
             WCSession.default.sendMessage(message, replyHandler: nil)
             WCSession.default.sendMessageData(ASImage.avatar10.value!.pngData()!, replyHandler: nil)
-//                           UIImage
         }
 
-        // update our rate limiting property
         lastMessage = CFAbsoluteTimeGetCurrent()
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesMoved(touches, with: event)
-
-        sendWatchMessage()
     }
 }
