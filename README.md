@@ -1,4 +1,4 @@
-# RN-Play-iOS
+# Avatar Sandbox App
 
 Small application, that can give you a chanse for you to make your own character. Here you can find a lot of different images, you can set as your avatar.
  You are also able to choose stats for your character as in real game!
