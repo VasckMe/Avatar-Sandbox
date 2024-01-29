@@ -104,10 +104,10 @@ final class AvatarViewController: UIViewController, ViewOwner {
         }
         
         let stats = AvatarStats(age: age, height: height, weight: weight)
-        let avatar = AvatarModel(stats: stats, image: selectedImage)
+        let avatar = AvatarModel(stats: stats, imageData: imageData)
         self.avatar = avatar
         
-        sendWatchMessage(avatarStats: avatar.stats, imageData: imageData)
+        sendWatchMessage(avatarStats: avatar.stats, imageData: avatar.imageData)
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {

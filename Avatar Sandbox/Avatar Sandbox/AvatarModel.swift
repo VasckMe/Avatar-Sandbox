@@ -9,7 +9,7 @@ import UIKit
 
 struct AvatarModel {
     let stats: AvatarStats
-    let image: String
+    let imageData: Data
 }
 
 struct AvatarStats {
