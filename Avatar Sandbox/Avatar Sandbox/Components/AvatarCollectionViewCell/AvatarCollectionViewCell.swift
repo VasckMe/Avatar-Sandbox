@@ -42,7 +42,7 @@ final class AvatarCollectionViewCell: UICollectionViewCell, ReusableView {
     
     // MARK: - Methods
     
-    func setup(image: ASImage?) {
+    func setup(image: AvatarImage?) {
         avatarImageView.image = image?.value
     }
     

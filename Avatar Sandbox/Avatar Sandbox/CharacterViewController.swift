@@ -13,7 +13,7 @@ final class CharacterViewController: UIViewController, ViewOwner {
 
     // MARK: - Properties
     
-    private let models = ASImage.allCases
+    private let models = AvatarImage.allCases
     private let cellSpacing: CGFloat = 10
     private let cellSize: CGSize = CGSize(width: 100, height: 100)
     private let lineSpacing: CGFloat = 20
@@ -22,7 +22,14 @@ final class CharacterViewController: UIViewController, ViewOwner {
     private var isHeightValid = false
     private var isWeightValid = false
     
-    private let validationService: ASValidationServiceProtocol = ASValidationService()
+    private var ageText: String = ""
+    private var heightText: String = ""
+    private var weightText: String = ""
+    private var selectedImage: String = ""
+    
+    private var avatar: AvatarModel?
+    
+    private let validationService: ValidationServiceProtocol = ValidationService()
     
     var lastMessage: CFAbsoluteTime = 0
     
@@ -45,19 +52,66 @@ final class CharacterViewController: UIViewController, ViewOwner {
             session.activate()
         }
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow(_:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide(_:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
     }
     
-    @objc func keyboardWillShow(_ notification: Notification) {
+    // MARK: - Actions
+    
+    @objc private func nextButtonDidTap() {
+        guard
+            let age = Int(ageText),
+            let height = Float(heightText),
+            let weight = Float(weightText)
+        else {
+            showAlert(title: "Enter stats")
+            return
+        }
+        
+        guard
+            let uiImage = UIImage(named: selectedImage),
+            let imageData = uiImage.pngData()
+        else {
+            showAlert(title: "Choose avatar")
+            return
+        }
+        
+        let stats = AvatarStats(age: age, height: height, weight: weight)
+        let avatar = AvatarModel(stats: stats, image: selectedImage)
+        self.avatar = avatar
+        
+        sendWatchMessage(avatarStats: avatar.stats, imageData: imageData)
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             rootView.contentUp(constant: keyboardSize.height)
             UIView.animate(withDuration: 0.3) {
@@ -66,24 +120,14 @@ final class CharacterViewController: UIViewController, ViewOwner {
         }
     }
 
-    @objc func keyboardWillHide(_ notification: Notification) {
+    @objc private func keyboardWillHide(_ notification: Notification) {
         rootView.contentDown()
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }
     }
     
-    // MARK: - @Objc methods
-    
-    @objc private func nextButtonDidTap() {
-        guard let model = rootView.getModel() else {
-            showAlert(title: "Choose avatar")
-            return
-        }
-        sendWatchMessage(model: model)
-    }
-    
-    // MARK: - Methods
+    // MARK: - Private
     
     private func selectMiddleCell() {
         let centerPoint = CGPoint(
@@ -93,11 +137,12 @@ final class CharacterViewController: UIViewController, ViewOwner {
 
         if let indexPath = rootView.avatarCollectionView.indexPathForItem(at: centerPoint) {
             rootView.avatarCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+            selectedImage = models[safe: indexPath.row]?.stringValue ?? ""
             rootView.refreshAvatar(with: models[safe: indexPath.row])
         }
     }
     
-    private func sendWatchMessage(model: CharacterModel) {
+    private func sendWatchMessage(avatarStats: AvatarStats, imageData: Data) {
         let currentTime = CFAbsoluteTimeGetCurrent()
 
         if lastMessage + 0.5 > currentTime {
@@ -105,9 +150,14 @@ final class CharacterViewController: UIViewController, ViewOwner {
         }
 
         if (WCSession.default.isReachable) {
-            let message = ["age": model.age, "height": model.height, "weight": model.weight] as [String : Any]
+            let message = [
+                "age": avatarStats.age,
+                "height": avatarStats.height,
+                "weight": avatarStats.weight
+            ] as [String : Any]
+            
             WCSession.default.sendMessage(message, replyHandler: nil)
-            WCSession.default.sendMessageData(model.image.pngData()!, replyHandler: nil)
+            WCSession.default.sendMessageData(imageData, replyHandler: nil)
         } else {
             showAlert(title: "Error", message: "Apple Watch is not reachable")
         }
@@ -121,6 +171,7 @@ final class CharacterViewController: UIViewController, ViewOwner {
 extension CharacterViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+        selectedImage = models[safe: indexPath.row]?.stringValue ?? ""
         rootView.refreshAvatar(with: models[safe: indexPath.row])
     }
     
@@ -185,20 +236,21 @@ extension CharacterViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-// MARK: - ASInputViewDelegate
+// MARK: - CustomParamViewDelegate
 
-extension CharacterViewController: ASInputViewDelegate {
-    func didTriggerTextField(of type: ASInputViewType, with text: String?) {
-        let isValid = validationService.isValid(text: text)
-        rootView.validate(type: type, isValid: isValid)
+extension CharacterViewController: CustomParamViewDelegate {
+    func didTriggerTextField(of type: CustomParamViewType, with text: String?) {
+        guard let text = text else {
+            return
+        }
         
         switch type {
         case .age:
-            isAgeValid = isValid
+            validateAge(text)
         case .height:
-            isHeightValid = isValid
+            validateHeight(text)
         case .weight:
-            isWeightValid = isValid
+            validateWeight(text)
         }
         
         rootView.disabledButton(enable: isAgeValid && isWeightValid && isHeightValid)
@@ -224,5 +276,51 @@ extension CharacterViewController: WCSessionDelegate {
     func sessionDidDeactivate(_ session: WCSession) {
         print("didDeactivate")
         WCSession.default.activate()
+    }
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        guard let test = message["test"] as? String else {
+            print("Error")
+            return
+        }
+        
+        print("Message from watchOS: \(test)")
+    }
+}
+
+// MARK: - Private
+
+private extension CharacterViewController {
+    func validateAge(_ text: String) {
+        isAgeValid = validationService.isValidAge(text: text)
+        
+        if isAgeValid {
+            ageText = text
+            rootView.showAgeValidationSuccess()
+        } else {
+            rootView.showAgeValidationError()
+        }
+    }
+    
+    func validateHeight(_ text: String) {
+        isHeightValid = validationService.isValidHeight(text: text)
+        
+        if isHeightValid {
+            heightText = text
+            rootView.showHeightValidationSuccess()
+        } else {
+            rootView.showHeightValidationError()
+        }
+    }
+    
+    func validateWeight(_ text: String) {
+        isWeightValid = validationService.isValidWeight(text: text)
+        
+        if isWeightValid {
+            weightText = text
+            rootView.showWeightValidationSuccess()
+        } else {
+            rootView.showWeightValidationError()
+        }
     }
 }

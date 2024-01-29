@@ -57,20 +57,20 @@ final class CharacterView: UIView {
         return stackView
     }()
     
-    private let ageInputView: ASInputView = {
-        let textField = ASInputView(type: .age)
+    private let ageInputView: CustomParamView = {
+        let textField = CustomParamView(type: .age)
         textField.setText("0")
         return textField
     }()
     
-    private let heightInputView: ASInputView = {
-        let textField = ASInputView(type: .height)
+    private let heightInputView: CustomParamView = {
+        let textField = CustomParamView(type: .height)
         textField.setText("0")
         return textField
     }()
     
-    private let weightInputView: ASInputView = {
-        let textField = ASInputView(type: .weight)
+    private let weightInputView: CustomParamView = {
+        let textField = CustomParamView(type: .weight)
         textField.setText("0")
         return textField
     }()
@@ -115,7 +115,7 @@ final class CharacterView: UIView {
         avatarCollectionView.delegate = delegate
     }
     
-    func refreshAvatar(with image: ASImage?) {
+    func refreshAvatar(with image: AvatarImage?) {
         UIView.transition(with: avatarImageView, duration: 0.5, options: .transitionCrossDissolve) {
             self.avatarImageView.image = image?.value
         }
@@ -128,15 +128,28 @@ final class CharacterView: UIView {
         }
     }
     
-    func validate(type: ASInputViewType, isValid: Bool) {
-        switch type {
-        case .age:
-            ageInputView.validate(isValid: isValid)
-        case .height:
-            heightInputView.validate(isValid: isValid)
-        case .weight:
-            weightInputView.validate(isValid: isValid)
-        }
+    func showAgeValidationSuccess() {
+        ageInputView.setValidated()
+    }
+    
+    func showAgeValidationError() {
+        ageInputView.showError()
+    }
+    
+    func showHeightValidationSuccess() {
+        heightInputView.setValidated()
+    }
+    
+    func showHeightValidationError() {
+        heightInputView.showError()
+    }
+    
+    func showWeightValidationSuccess() {
+        weightInputView.setValidated()
+    }
+    
+    func showWeightValidationError() {
+        weightInputView.showError()
     }
     
     func contentDown() {
@@ -144,22 +157,11 @@ final class CharacterView: UIView {
         bottomInset = 0
     }
     
-    func getModel() -> CharacterModel? {
-        guard let image = avatarImageView.image else {
-            return nil
-        }
-        let age = ageInputView.getText()
-        let height = heightInputView.getText()
-        let weight = weightInputView.getText()
-        
-        return CharacterModel(age: age, height: height, weight: weight, image: image)
-    }
-    
     func disabledButton(enable: Bool) {
         continueButton.isEnabled = enable
     }
     
-    func setupInputViews(delegate: ASInputViewDelegate) {
+    func setupInputViews(delegate: CustomParamViewDelegate) {
         ageInputView.delegate = delegate
         heightInputView.delegate = delegate
         weightInputView.delegate = delegate
