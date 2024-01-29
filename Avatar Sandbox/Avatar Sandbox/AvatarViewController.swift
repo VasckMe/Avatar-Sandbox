@@ -1,5 +1,5 @@
 //
-//  CharacterViewController.swift
+//  AvatarViewController.swift
 //  Avatar Sandbox
 //
 //  Created by Anton Kasaryn on 26.01.24.
@@ -8,10 +8,8 @@
 import UIKit
 import WatchConnectivity
 
-final class CharacterViewController: UIViewController, ViewOwner {
-    typealias RootView = CharacterView
-
-    // MARK: - Properties
+final class AvatarViewController: UIViewController, ViewOwner {
+    typealias RootView = AvatarView
     
     private let models = AvatarImage.allCases
     private let cellSpacing: CGFloat = 10
@@ -31,12 +29,12 @@ final class CharacterViewController: UIViewController, ViewOwner {
     
     private let validationService: ValidationServiceProtocol = ValidationService()
     
-    var lastMessage: CFAbsoluteTime = 0
+    private var lastMessage: CFAbsoluteTime = 0
     
     // MARK: - Life cycle
     
     override func loadView() {
-        view = CharacterView()
+        view = AvatarView()
         rootView.setupCollectionView(dataSource: self)
         rootView.setupCollectionView(delegate: self)
         rootView.setupInputViews(delegate: self)
@@ -127,49 +125,11 @@ final class CharacterViewController: UIViewController, ViewOwner {
             self.view.layoutIfNeeded()
         }
     }
-    
-    // MARK: - Private
-    
-    private func selectMiddleCell() {
-        let centerPoint = CGPoint(
-            x: rootView.avatarCollectionView.contentOffset.x + rootView.avatarCollectionView.bounds.width / 2,
-            y: rootView.avatarCollectionView.bounds.height / 2
-        )
-
-        if let indexPath = rootView.avatarCollectionView.indexPathForItem(at: centerPoint) {
-            rootView.avatarCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
-            selectedImage = models[safe: indexPath.row]?.stringValue ?? ""
-            rootView.refreshAvatar(with: models[safe: indexPath.row])
-        }
-    }
-    
-    private func sendWatchMessage(avatarStats: AvatarStats, imageData: Data) {
-        let currentTime = CFAbsoluteTimeGetCurrent()
-
-        if lastMessage + 0.5 > currentTime {
-            return
-        }
-
-        if (WCSession.default.isReachable) {
-            let message = [
-                "age": avatarStats.age,
-                "height": avatarStats.height,
-                "weight": avatarStats.weight
-            ] as [String : Any]
-            
-            WCSession.default.sendMessage(message, replyHandler: nil)
-            WCSession.default.sendMessageData(imageData, replyHandler: nil)
-        } else {
-            showAlert(title: "Error", message: "Apple Watch is not reachable")
-        }
-
-        lastMessage = CFAbsoluteTimeGetCurrent()
-    }
 }
 
 // MARK: - UICollectionViewDelegate
 
-extension CharacterViewController: UICollectionViewDelegate {
+extension AvatarViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
         selectedImage = models[safe: indexPath.row]?.stringValue ?? ""
@@ -189,7 +149,7 @@ extension CharacterViewController: UICollectionViewDelegate {
 
 // MARK: - UICollectionViewDataSource
 
-extension CharacterViewController: UICollectionViewDataSource {
+extension AvatarViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         models.count
     }
@@ -211,7 +171,7 @@ extension CharacterViewController: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
-extension CharacterViewController: UICollectionViewDelegateFlowLayout {
+extension AvatarViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
@@ -237,10 +197,10 @@ extension CharacterViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-// MARK: - CustomParamViewDelegate
+// MARK: - SettingViewDelegate
 
-extension CharacterViewController: CustomParamViewDelegate {
-    func didTriggerTextField(of type: CustomParamViewType, with text: String?) {
+extension AvatarViewController: SettingViewDelegate {
+    func didTriggerTextField(of type: SettingViewType, with text: String?) {
         guard let text = text else {
             return
         }
@@ -260,7 +220,7 @@ extension CharacterViewController: CustomParamViewDelegate {
 
 // MARK: - WCSessionDelegate
 
-extension CharacterViewController: WCSessionDelegate {
+extension AvatarViewController: WCSessionDelegate {
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         print("session")
         if let error = error {
@@ -297,7 +257,7 @@ extension CharacterViewController: WCSessionDelegate {
 
 // MARK: - Private
 
-private extension CharacterViewController {
+private extension AvatarViewController {
     func validateAge(_ text: String) {
         isAgeValid = validationService.isValidAge(text: text)
         
@@ -333,5 +293,41 @@ private extension CharacterViewController {
     
     func syncStats(age: Int, height: Float, weight: Float) {
         rootView.refreshStats(age: String(age), height: String(height), weight: String(weight))
+    }
+    
+    private func selectMiddleCell() {
+        let centerPoint = CGPoint(
+            x: rootView.avatarCollectionView.contentOffset.x + rootView.avatarCollectionView.bounds.width / 2,
+            y: rootView.avatarCollectionView.bounds.height / 2
+        )
+
+        if let indexPath = rootView.avatarCollectionView.indexPathForItem(at: centerPoint) {
+            rootView.avatarCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+            selectedImage = models[safe: indexPath.row]?.stringValue ?? ""
+            rootView.refreshAvatar(with: models[safe: indexPath.row])
+        }
+    }
+    
+    private func sendWatchMessage(avatarStats: AvatarStats, imageData: Data) {
+        let currentTime = CFAbsoluteTimeGetCurrent()
+
+        if lastMessage + 0.5 > currentTime {
+            return
+        }
+
+        if (WCSession.default.isReachable) {
+            let message = [
+                "age": avatarStats.age,
+                "height": avatarStats.height,
+                "weight": avatarStats.weight
+            ] as [String : Any]
+            
+            WCSession.default.sendMessage(message, replyHandler: nil)
+            WCSession.default.sendMessageData(imageData, replyHandler: nil)
+        } else {
+            showAlert(title: "Error", message: "Apple Watch is not reachable")
+        }
+
+        lastMessage = CFAbsoluteTimeGetCurrent()
     }
 }

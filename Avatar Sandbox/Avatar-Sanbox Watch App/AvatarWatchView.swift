@@ -1,5 +1,5 @@
 //
-//  AvatarView.swift
+//  AvatarWatchView.swift
 //  Avatar-Sanbox Watch App
 //
 //  Created by Anton Kasaryn on 27.01.24.
@@ -8,22 +8,8 @@
 import SwiftUI
 import WatchConnectivity
 
-struct AvatarStatsSwiftUI {
-    var age: Int
-    var height: Float
-    var weight: Float
-    
-    var heightText: String {
-        return String(height.rounded())
-    }
-    
-    var weightText: String {
-        return String(weight.rounded())
-    }
-}
-
-struct AvatarView: View {
-    @StateObject var viewModel = AvatarViewModel()
+struct AvatarWatchView: View {
+    @StateObject var viewModel = AvatarWatchViewModel()
     
     var body: some View {
         NavigationView {
@@ -64,6 +50,6 @@ struct AvatarView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        AvatarView()
+        AvatarWatchView()
     }
 }

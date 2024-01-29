@@ -1,11 +1,11 @@
 //
-//  CustomParamViewType.swift
+//  SettingViewType.swift
 //  Avatar Sandbox
 //
 //  Created by Anton Kasaryn on 26.01.24.
 //
 
-enum CustomParamViewType {
+enum SettingViewType {
     case age
     case height
     case weight

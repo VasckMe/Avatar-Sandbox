@@ -1,5 +1,5 @@
 //
-//  AvatarViewModel.swift
+//  AvatarWatchViewModel.swift
 //  Avatar-Sanbox Watch App
 //
 //  Created by Anton Kasaryn on 28.01.24.
@@ -9,14 +9,14 @@ import Combine
 import WatchConnectivity
 import SwiftUI
 
-public final class AvatarViewModel: ObservableObject {
+final class AvatarWatchViewModel: ObservableObject {
     var session: WCSession
     let delegate: WCSessionDelegate
         
     let imageSubject = PassthroughSubject<UIImage, Never>()
-    let avatarStatsSubject = PassthroughSubject<AvatarStatsSwiftUI, Never>()
+    let avatarStatsSubject = PassthroughSubject<AvatarWatchModel, Never>()
     
-    @Published var avatarStats = AvatarStatsSwiftUI(age: 0, height: 0, weight: 0)
+    @Published var avatarStats = AvatarWatchModel(age: 0, height: 0, weight: 0)
     @Published var image: UIImage = UIImage()
     
     init(session: WCSession = .default) {

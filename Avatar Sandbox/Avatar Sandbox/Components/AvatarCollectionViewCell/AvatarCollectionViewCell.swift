@@ -45,25 +45,28 @@ final class AvatarCollectionViewCell: UICollectionViewCell, ReusableView {
     func setup(image: AvatarImage?) {
         avatarImageView.image = image?.value
     }
-    
-    private func configure() {
+}
+
+// MARK: - Private setup
+
+private extension AvatarCollectionViewCell {
+    func configure() {
         configureView()
         addSubviews()
         setupConstraints()
     }
     
-    private func configureView() {
+    func configureView() {
         contentView.layer.cornerRadius = 20
     }
     
-    private func addSubviews() {
+    func addSubviews() {
         contentView.addSubview(avatarImageView)
     }
     
-    private func setupConstraints() {
+    func setupConstraints() {
         avatarImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(10)
         }
     }
 }
-

@@ -9,14 +9,14 @@ import Combine
 import SwiftUI
 import WatchConnectivity
 
-class SessionDelegater: NSObject, WCSessionDelegate {
+final class SessionDelegater: NSObject, WCSessionDelegate {
     let imageSubject: PassthroughSubject<UIImage, Never>
     
-    let avatarStatsSubject: PassthroughSubject<AvatarStatsSwiftUI, Never>
+    let avatarStatsSubject: PassthroughSubject<AvatarWatchModel, Never>
     
     init(
         imageSubject: PassthroughSubject<UIImage, Never>,
-        avatarStatsSubject: PassthroughSubject<AvatarStatsSwiftUI, Never>
+        avatarStatsSubject: PassthroughSubject<AvatarWatchModel, Never>
     ) {
         self.imageSubject = imageSubject
         self.avatarStatsSubject = avatarStatsSubject
@@ -42,7 +42,7 @@ class SessionDelegater: NSObject, WCSessionDelegate {
                 return
             }
 
-            self.avatarStatsSubject.send(AvatarStatsSwiftUI(age: age, height: height, weight: weight))
+            self.avatarStatsSubject.send(AvatarWatchModel(age: age, height: height, weight: weight))
         }
     }
     
@@ -56,15 +56,12 @@ class SessionDelegater: NSObject, WCSessionDelegate {
         }
     }
     
-    // iOS Protocol comformance
-    // Not needed for this demo otherwise
     #if os(iOS)
     func sessionDidBecomeInactive(_ session: WCSession) {
         print("\(#function): activationState = \(session.activationState.rawValue)")
     }
     
     func sessionDidDeactivate(_ session: WCSession) {
-        // Activate the new session after having switched to a new watch.
         session.activate()
     }
     

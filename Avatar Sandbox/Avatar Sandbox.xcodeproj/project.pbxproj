@@ -11,8 +11,8 @@
 		1828ED992B6552AA000E56CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1828ED982B6552AA000E56CC /* Assets.xcassets */; };
 		1828ED9C2B6552AA000E56CC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1828ED9B2B6552AA000E56CC /* Preview Assets.xcassets */; };
 		1828EDA22B655633000E56CC /* Avatar-Sanbox Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 1828ED922B6552A8000E56CC /* Avatar-Sanbox Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		188E4A4A2B66DC5900C75296 /* AvatarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188E4A492B66DC5900C75296 /* AvatarViewModel.swift */; };
-		188E4A4B2B66DCF100C75296 /* AvatarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188E4A492B66DC5900C75296 /* AvatarViewModel.swift */; };
+		188E4A4A2B66DC5900C75296 /* AvatarWatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188E4A492B66DC5900C75296 /* AvatarWatchViewModel.swift */; };
+		188E4A4B2B66DCF100C75296 /* AvatarWatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188E4A492B66DC5900C75296 /* AvatarWatchViewModel.swift */; };
 		188E4A4D2B66DD1700C75296 /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188E4A4C2B66DD1700C75296 /* SessionDelegate.swift */; };
 		188E4A4E2B66DD2800C75296 /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188E4A4C2B66DD1700C75296 /* SessionDelegate.swift */; };
 		18A01BF32B64FFA300E5983F /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A01BF22B64FFA300E5983F /* Array.swift */; };
@@ -20,15 +20,15 @@
 		18A01BF92B6528A200E5983F /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A01BF82B6528A200E5983F /* ValidationService.swift */; };
 		18A1E7112B640E8100FE9FE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7102B640E8100FE9FE3 /* AppDelegate.swift */; };
 		18A1E7132B640E8100FE9FE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7122B640E8100FE9FE3 /* SceneDelegate.swift */; };
-		18A1E7152B640E8100FE9FE3 /* CharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7142B640E8100FE9FE3 /* CharacterViewController.swift */; };
+		18A1E7152B640E8100FE9FE3 /* AvatarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7142B640E8100FE9FE3 /* AvatarViewController.swift */; };
 		18A1E71A2B640E8400FE9FE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18A1E7192B640E8400FE9FE3 /* Assets.xcassets */; };
 		18A1E71D2B640E8400FE9FE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18A1E71B2B640E8400FE9FE3 /* LaunchScreen.storyboard */; };
 		18A1E7262B6412F900FE9FE3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18A1E7252B6412F900FE9FE3 /* SnapKit */; };
 		18A1E7332B641FA900FE9FE3 /* ViewOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7322B641FA900FE9FE3 /* ViewOwner.swift */; };
-		18A1E7352B641FF100FE9FE3 /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7342B641FF100FE9FE3 /* CharacterView.swift */; };
-		18A1E7372B64267400FE9FE3 /* CustomParamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7362B64267400FE9FE3 /* CustomParamView.swift */; };
+		18A1E7352B641FF100FE9FE3 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7342B641FF100FE9FE3 /* AvatarView.swift */; };
+		18A1E7372B64267400FE9FE3 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7362B64267400FE9FE3 /* SettingView.swift */; };
 		18A1E7392B64301100FE9FE3 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7382B64301100FE9FE3 /* UITextField.swift */; };
-		18A1E73E2B64337900FE9FE3 /* CustomParamViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E73D2B64337900FE9FE3 /* CustomParamViewType.swift */; };
+		18A1E73E2B64337900FE9FE3 /* SettingViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E73D2B64337900FE9FE3 /* SettingViewType.swift */; };
 		18A1E7402B64344900FE9FE3 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E73F2B64344900FE9FE3 /* UIViewController.swift */; };
 		18A1E7422B643BE600FE9FE3 /* AvatarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7412B643BE600FE9FE3 /* AvatarCollectionViewCell.swift */; };
 		18A1E7442B643C7000FE9FE3 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E7432B643C7000FE9FE3 /* ReusableView.swift */; };
@@ -36,10 +36,12 @@
 		18ADFAB52B65670B00E48240 /* AvatarImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E74A2B6451B200FE9FE3 /* AvatarImage.swift */; };
 		18ADFAB92B65899500E48240 /* AvatarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ADFAB82B65899500E48240 /* AvatarModel.swift */; };
 		18B051A82B672834007B0C36 /* ValidationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B051A72B672834007B0C36 /* ValidationServiceTests.swift */; };
+		18B051AA2B67385F007B0C36 /* AvatarWatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B051A92B67385F007B0C36 /* AvatarWatchModel.swift */; };
+		18B051AB2B673878007B0C36 /* AvatarWatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B051A92B67385F007B0C36 /* AvatarWatchModel.swift */; };
 		18DA98D82B671E19002C4956 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DA98D52B671E19002C4956 /* CircleImage.swift */; };
-		18DA98D92B671E19002C4956 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DA98D62B671E19002C4956 /* AvatarView.swift */; };
+		18DA98D92B671E19002C4956 /* AvatarWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DA98D62B671E19002C4956 /* AvatarWatchView.swift */; };
 		18DA98DA2B671E19002C4956 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DA98D72B671E19002C4956 /* DetailsView.swift */; };
-		18DA98DB2B671EBA002C4956 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DA98D62B671E19002C4956 /* AvatarView.swift */; };
+		18DA98DB2B671EBA002C4956 /* AvatarWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DA98D62B671E19002C4956 /* AvatarWatchView.swift */; };
 		18DA98DC2B671EE4002C4956 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DA98D72B671E19002C4956 /* DetailsView.swift */; };
 		18DA98DD2B671EF1002C4956 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DA98D52B671E19002C4956 /* CircleImage.swift */; };
 /* End PBXBuildFile section */
@@ -110,7 +112,7 @@
 		1828ED942B6552A8000E56CC /* Avatar_SanboxApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar_SanboxApp.swift; sourceTree = "<group>"; };
 		1828ED982B6552AA000E56CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1828ED9B2B6552AA000E56CC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		188E4A492B66DC5900C75296 /* AvatarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarViewModel.swift; sourceTree = "<group>"; };
+		188E4A492B66DC5900C75296 /* AvatarWatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarWatchViewModel.swift; sourceTree = "<group>"; };
 		188E4A4C2B66DD1700C75296 /* SessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDelegate.swift; sourceTree = "<group>"; };
 		18A01BF22B64FFA300E5983F /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		18A01BF52B65060D00E5983F /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
@@ -118,15 +120,15 @@
 		18A1E70D2B640E8100FE9FE3 /* Avatar Sandbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Avatar Sandbox.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18A1E7102B640E8100FE9FE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18A1E7122B640E8100FE9FE3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		18A1E7142B640E8100FE9FE3 /* CharacterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewController.swift; sourceTree = "<group>"; };
+		18A1E7142B640E8100FE9FE3 /* AvatarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarViewController.swift; sourceTree = "<group>"; };
 		18A1E7192B640E8400FE9FE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18A1E71C2B640E8400FE9FE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18A1E71E2B640E8400FE9FE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18A1E7322B641FA900FE9FE3 /* ViewOwner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOwner.swift; sourceTree = "<group>"; };
-		18A1E7342B641FF100FE9FE3 /* CharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
-		18A1E7362B64267400FE9FE3 /* CustomParamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomParamView.swift; sourceTree = "<group>"; };
+		18A1E7342B641FF100FE9FE3 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
+		18A1E7362B64267400FE9FE3 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		18A1E7382B64301100FE9FE3 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
-		18A1E73D2B64337900FE9FE3 /* CustomParamViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomParamViewType.swift; sourceTree = "<group>"; };
+		18A1E73D2B64337900FE9FE3 /* SettingViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewType.swift; sourceTree = "<group>"; };
 		18A1E73F2B64344900FE9FE3 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		18A1E7412B643BE600FE9FE3 /* AvatarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCollectionViewCell.swift; sourceTree = "<group>"; };
 		18A1E7432B643C7000FE9FE3 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
@@ -135,8 +137,9 @@
 		18ADFAB82B65899500E48240 /* AvatarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarModel.swift; sourceTree = "<group>"; };
 		18B0519E2B6727A6007B0C36 /* Avatar SandboxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Avatar SandboxTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18B051A72B672834007B0C36 /* ValidationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationServiceTests.swift; sourceTree = "<group>"; };
+		18B051A92B67385F007B0C36 /* AvatarWatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarWatchModel.swift; sourceTree = "<group>"; };
 		18DA98D52B671E19002C4956 /* CircleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
-		18DA98D62B671E19002C4956 /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
+		18DA98D62B671E19002C4956 /* AvatarWatchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarWatchView.swift; sourceTree = "<group>"; };
 		18DA98D72B671E19002C4956 /* DetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -171,8 +174,9 @@
 			children = (
 				18DA98D42B671E19002C4956 /* Views */,
 				1828ED942B6552A8000E56CC /* Avatar_SanboxApp.swift */,
-				18DA98D62B671E19002C4956 /* AvatarView.swift */,
-				188E4A492B66DC5900C75296 /* AvatarViewModel.swift */,
+				18DA98D62B671E19002C4956 /* AvatarWatchView.swift */,
+				188E4A492B66DC5900C75296 /* AvatarWatchViewModel.swift */,
+				18B051A92B67385F007B0C36 /* AvatarWatchModel.swift */,
 				188E4A4C2B66DD1700C75296 /* SessionDelegate.swift */,
 				1828ED982B6552AA000E56CC /* Assets.xcassets */,
 				1828ED9A2B6552AA000E56CC /* Preview Content */,
@@ -260,8 +264,8 @@
 		18A1E72E2B641A5300FE9FE3 /* Module */ = {
 			isa = PBXGroup;
 			children = (
-				18A1E7342B641FF100FE9FE3 /* CharacterView.swift */,
-				18A1E7142B640E8100FE9FE3 /* CharacterViewController.swift */,
+				18A1E7342B641FF100FE9FE3 /* AvatarView.swift */,
+				18A1E7142B640E8100FE9FE3 /* AvatarViewController.swift */,
 				18ADFAB82B65899500E48240 /* AvatarModel.swift */,
 			);
 			name = Module;
@@ -284,18 +288,18 @@
 			children = (
 				18A01BF42B6505FD00E5983F /* PreviewContainer */,
 				18A1E7462B643C9B00FE9FE3 /* AvatarCollectionViewCell */,
-				18A1E73A2B64335400FE9FE3 /* CustomParam */,
+				18A1E73A2B64335400FE9FE3 /* SettingView */,
 			);
 			path = Components;
 			sourceTree = "<group>";
 		};
-		18A1E73A2B64335400FE9FE3 /* CustomParam */ = {
+		18A1E73A2B64335400FE9FE3 /* SettingView */ = {
 			isa = PBXGroup;
 			children = (
-				18A1E7362B64267400FE9FE3 /* CustomParamView.swift */,
-				18A1E73D2B64337900FE9FE3 /* CustomParamViewType.swift */,
+				18A1E7362B64267400FE9FE3 /* SettingView.swift */,
+				18A1E73D2B64337900FE9FE3 /* SettingViewType.swift */,
 			);
-			path = CustomParam;
+			path = SettingView;
 			sourceTree = "<group>";
 		};
 		18A1E7462B643C9B00FE9FE3 /* AvatarCollectionViewCell */ = {
@@ -473,12 +477,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18B051AA2B67385F007B0C36 /* AvatarWatchModel.swift in Sources */,
 				18DA98D82B671E19002C4956 /* CircleImage.swift in Sources */,
 				18ADFAB52B65670B00E48240 /* AvatarImage.swift in Sources */,
 				188E4A4D2B66DD1700C75296 /* SessionDelegate.swift in Sources */,
 				18DA98DA2B671E19002C4956 /* DetailsView.swift in Sources */,
-				188E4A4A2B66DC5900C75296 /* AvatarViewModel.swift in Sources */,
-				18DA98D92B671E19002C4956 /* AvatarView.swift in Sources */,
+				188E4A4A2B66DC5900C75296 /* AvatarWatchViewModel.swift in Sources */,
+				18DA98D92B671E19002C4956 /* AvatarWatchView.swift in Sources */,
 				1828ED952B6552A8000E56CC /* Avatar_SanboxApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -487,25 +492,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18A1E7352B641FF100FE9FE3 /* CharacterView.swift in Sources */,
+				18A1E7352B641FF100FE9FE3 /* AvatarView.swift in Sources */,
 				18DA98DC2B671EE4002C4956 /* DetailsView.swift in Sources */,
-				18A1E73E2B64337900FE9FE3 /* CustomParamViewType.swift in Sources */,
+				18B051AB2B673878007B0C36 /* AvatarWatchModel.swift in Sources */,
+				18A1E73E2B64337900FE9FE3 /* SettingViewType.swift in Sources */,
 				18A1E7332B641FA900FE9FE3 /* ViewOwner.swift in Sources */,
 				18A01BF32B64FFA300E5983F /* Array.swift in Sources */,
 				18ADFAB92B65899500E48240 /* AvatarModel.swift in Sources */,
 				188E4A4E2B66DD2800C75296 /* SessionDelegate.swift in Sources */,
 				18A01BF92B6528A200E5983F /* ValidationService.swift in Sources */,
 				18A1E7442B643C7000FE9FE3 /* ReusableView.swift in Sources */,
-				18DA98DB2B671EBA002C4956 /* AvatarView.swift in Sources */,
+				18DA98DB2B671EBA002C4956 /* AvatarWatchView.swift in Sources */,
 				18A1E74B2B6451B200FE9FE3 /* AvatarImage.swift in Sources */,
 				18A1E7392B64301100FE9FE3 /* UITextField.swift in Sources */,
 				18A1E7402B64344900FE9FE3 /* UIViewController.swift in Sources */,
 				18A1E7422B643BE600FE9FE3 /* AvatarCollectionViewCell.swift in Sources */,
 				18A01BF62B65060D00E5983F /* PreviewContainer.swift in Sources */,
-				18A1E7152B640E8100FE9FE3 /* CharacterViewController.swift in Sources */,
-				18A1E7372B64267400FE9FE3 /* CustomParamView.swift in Sources */,
+				18A1E7152B640E8100FE9FE3 /* AvatarViewController.swift in Sources */,
+				18A1E7372B64267400FE9FE3 /* SettingView.swift in Sources */,
 				18DA98DD2B671EF1002C4956 /* CircleImage.swift in Sources */,
-				188E4A4B2B66DCF100C75296 /* AvatarViewModel.swift in Sources */,
+				188E4A4B2B66DCF100C75296 /* AvatarWatchViewModel.swift in Sources */,
 				18A1E7112B640E8100FE9FE3 /* AppDelegate.swift in Sources */,
 				18A1E7132B640E8100FE9FE3 /* SceneDelegate.swift in Sources */,
 			);

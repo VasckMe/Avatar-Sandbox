@@ -13,8 +13,8 @@ protocol ValidationServiceProtocol {
 
 final class ValidationService {
     static let ageValidRange = 1...100
-    static let heightValidRange = Float(20.0)...Float(300.0)
-    static let weightValidRange = Float(1.0)...Float(200.0)
+    static let heightValidRange = Float(20.0)...Float(100.0)
+    static let weightValidRange = Float(1.0)...Float(100.0)
 }
 
 // MARK: - ValidationServiceProtocol

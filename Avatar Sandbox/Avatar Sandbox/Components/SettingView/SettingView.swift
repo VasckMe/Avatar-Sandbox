@@ -8,16 +8,16 @@
 import UIKit
 import SwiftUI
 
-protocol CustomParamViewDelegate: AnyObject {
-    func didTriggerTextField(of type: CustomParamViewType, with text: String?)
+protocol SettingViewDelegate: AnyObject {
+    func didTriggerTextField(of type: SettingViewType, with text: String?)
 }
 
-final class CustomParamView: UIView {
+final class SettingView: UIView {
     private let animationDuration: Double = 0.3
     
-    weak var delegate: CustomParamViewDelegate?
+    weak var delegate: SettingViewDelegate?
     
-    private var type: CustomParamViewType
+    private var type: SettingViewType
     
     // MARK: - Outlets
     
@@ -61,7 +61,7 @@ final class CustomParamView: UIView {
     
     // MARK: - Life cycle
     
-    init(type: CustomParamViewType) {
+    init(type: SettingViewType) {
         self.type = type
         super.init(frame: .zero)
         configure()
@@ -71,7 +71,7 @@ final class CustomParamView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - @Objc methods
+    // MARK: - Actions
     
     @objc func sliderDidChange() {
         if type == .age {
@@ -132,7 +132,7 @@ final class CustomParamView: UIView {
 
 // MARK: - UITextFieldDelegate
 
-extension CustomParamView: UITextFieldDelegate {
+extension SettingView: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let text = textField.text else {
             return
@@ -160,7 +160,7 @@ extension CustomParamView: UITextFieldDelegate {
 
 // MARK: - Private setup
 
-private extension CustomParamView {
+private extension SettingView {
     func configure() {
         configureTextField()
         configureTitleLabel()
@@ -209,7 +209,7 @@ private extension CustomParamView {
 struct ASTextField_Previews: PreviewProvider {
     static var previews: some View {
         PreviewContainer  {
-            let view = CustomParamView(type: .age)
+            let view = SettingView(type: .age)
             return view
         }
         .previewLayout(.sizeThatFits)

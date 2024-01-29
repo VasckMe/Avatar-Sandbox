@@ -1,5 +1,5 @@
 //
-//  CharacterView.swift
+//  AvatarView.swift
 //  Avatar Sandbox
 //
 //  Created by Anton Kasaryn on 26.01.24.
@@ -8,8 +8,10 @@
 import UIKit
 import SnapKit
 
-final class CharacterView: UIView {
+final class AvatarView: UIView {
 
+    var bottomInset: CGFloat = 0
+    
     // MARK: - Outlets
     
     private let titleLabel: UILabel = {
@@ -49,7 +51,7 @@ final class CharacterView: UIView {
         return collectionView
     }()
     
-    private let inputContainer: UIStackView = {
+    private let settingContainer: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 10
@@ -57,20 +59,20 @@ final class CharacterView: UIView {
         return stackView
     }()
     
-    private let ageInputView: CustomParamView = {
-        let textField = CustomParamView(type: .age)
+    private let ageSettingView: SettingView = {
+        let textField = SettingView(type: .age)
         textField.setText("0")
         return textField
     }()
     
-    private let heightInputView: CustomParamView = {
-        let textField = CustomParamView(type: .height)
+    private let heightSettingView: SettingView = {
+        let textField = SettingView(type: .height)
         textField.setText("0")
         return textField
     }()
     
-    private let weightInputView: CustomParamView = {
-        let textField = CustomParamView(type: .weight)
+    private let weightSettingView: SettingView = {
+        let textField = SettingView(type: .weight)
         textField.setText("0")
         return textField
     }()
@@ -89,10 +91,6 @@ final class CharacterView: UIView {
         button.isEnabled = false
         return button
     }()
-    
-    // MARK: - Properties
-    
-    var bottomInset: CGFloat = 0
     
     // MARK: - Life cycle
     
@@ -121,41 +119,41 @@ final class CharacterView: UIView {
         }
     }
     
-    func contentUp(constant: CGFloat) {
-        if bottomInset == 0 {
-            bottomInset = bounds.height - inputContainer.frame.maxY + constant
-            bounds.size.height += bottomInset
-        }
-    }
-    
     func showAgeValidationSuccess() {
-        ageInputView.setValidated()
+        ageSettingView.setValidated()
     }
     
     func showAgeValidationError() {
-        ageInputView.showError()
+        ageSettingView.showError()
     }
     
     func showHeightValidationSuccess() {
-        heightInputView.setValidated()
+        heightSettingView.setValidated()
     }
     
     func showHeightValidationError() {
-        heightInputView.showError()
+        heightSettingView.showError()
     }
     
     func showWeightValidationSuccess() {
-        weightInputView.setValidated()
+        weightSettingView.setValidated()
     }
     
     func showWeightValidationError() {
-        weightInputView.showError()
+        weightSettingView.showError()
     }
     
     func refreshStats(age: String?, height: String?, weight: String?) {
-        ageInputView.setText(age)
-        heightInputView.setText(height)
-        weightInputView.setText(weight)
+        ageSettingView.setText(age)
+        heightSettingView.setText(height)
+        weightSettingView.setText(weight)
+    }
+    
+    func contentUp(constant: CGFloat) {
+        if bottomInset == 0 {
+            bottomInset = bounds.height - settingContainer.frame.maxY + constant
+            bounds.size.height += bottomInset
+        }
     }
     
     func contentDown() {
@@ -167,65 +165,39 @@ final class CharacterView: UIView {
         continueButton.isEnabled = enable
     }
     
-    func setupInputViews(delegate: CustomParamViewDelegate) {
-        ageInputView.delegate = delegate
-        heightInputView.delegate = delegate
-        weightInputView.delegate = delegate
+    func setupInputViews(delegate: SettingViewDelegate) {
+        ageSettingView.delegate = delegate
+        heightSettingView.delegate = delegate
+        weightSettingView.delegate = delegate
     }
-    
-    func animateTransition(completion: @escaping () -> ()) {
-        UIView.animate(
-            withDuration: 1.0) { [self] in
-                titleLabel.frame.origin.y -= titleLabel.frame.height
-                titleLabel.alpha = 0.0
-                avatarBorderView.center = center
-                avatarCollectionView.frame.origin.y += avatarCollectionView.frame.height
-                avatarCollectionView.alpha = 0.0
-                continueButton.frame.origin.y += continueButton.frame.height
-                continueButton.alpha = 0.0
-            } completion: { _ in
-                UIView.animate(
-                    withDuration: 1.0) { [self] in
-                        avatarBorderView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-                    } completion: { [self] _ in
-                        completion()
-                        reloadViews()
-                    }
-            }
-    }
-    
-    func reloadViews() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [self] in
-            titleLabel.alpha = 1.0
-            continueButton.alpha = 1.0
-            avatarCollectionView.alpha = 1.0
-            setNeedsLayout()
-        }
-    }
-    
-    private func configure() {
+}
+
+// MARK: - Private setup
+
+private extension AvatarView {
+    func configure() {
         configureView()
         addSubviews()
         setupConstraints()
     }
     
-    private func configureView() {
+    func configureView() {
         backgroundColor = .darkGray
     }
     
-    private func addSubviews() {
+    func addSubviews() {
         addSubview(titleLabel)
         addSubview(avatarBorderView)
         avatarBorderView.addSubview(avatarImageView)
         addSubview(avatarCollectionView)
-        addSubview(inputContainer)
-        inputContainer.addArrangedSubview(ageInputView)
-        inputContainer.addArrangedSubview(heightInputView)
-        inputContainer.addArrangedSubview(weightInputView)
+        addSubview(settingContainer)
+        settingContainer.addArrangedSubview(ageSettingView)
+        settingContainer.addArrangedSubview(heightSettingView)
+        settingContainer.addArrangedSubview(weightSettingView)
         addSubview(continueButton)
     }
     
-    private func setupConstraints() {
+    func setupConstraints() {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(layoutMarginsGuide)
             make.leading.trailing.equalToSuperview().inset(15)
@@ -247,13 +219,13 @@ final class CharacterView: UIView {
             make.height.equalTo(100)
         }
         
-        inputContainer.snp.makeConstraints { make in
+        settingContainer.snp.makeConstraints { make in
             make.top.equalTo(avatarCollectionView.snp.bottom).offset(30)
             make.leading.trailing.equalToSuperview().inset(30)
         }
         
         continueButton.snp.makeConstraints { make in
-            make.top.equalTo(inputContainer.snp.bottom).offset(30)
+            make.top.equalTo(settingContainer.snp.bottom).offset(30)
             make.centerX.equalToSuperview()
             make.width.equalTo(150)
             make.height.equalTo(40)
