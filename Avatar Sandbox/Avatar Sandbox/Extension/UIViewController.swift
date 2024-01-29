@@ -33,7 +33,7 @@ extension UIViewController {
         completion: (() -> Void)? = nil
     ) {
         DispatchQueue.main.async { [weak self] in
-            self?.navigationController?.present(
+            self?.present(
                 viewController,
                 animated: animated,
                 completion: completion

@@ -97,6 +97,7 @@ final class CharacterViewController: UIViewController, ViewOwner {
         }
         
         guard
+            !selectedImage.isEmpty,
             let uiImage = UIImage(named: selectedImage),
             let imageData = uiImage.pngData()
         else {
@@ -279,12 +280,18 @@ extension CharacterViewController: WCSessionDelegate {
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        guard let test = message["test"] as? String else {
-            print("Error")
-            return
+        DispatchQueue.main.async {
+            guard
+                let age = message["age"] as? Int,
+                let height = message["height"] as? Float,
+                let weight = message["weight"] as? Float
+            else {
+                print("There was an error with decoding")
+                return
+            }
+            
+            self.syncStats(age: age, height: height, weight: weight)
         }
-        
-        print("Message from watchOS: \(test)")
     }
 }
 
@@ -322,5 +329,9 @@ private extension CharacterViewController {
         } else {
             rootView.showWeightValidationError()
         }
+    }
+    
+    func syncStats(age: Int, height: Float, weight: Float) {
+        rootView.refreshStats(age: String(age), height: String(height), weight: String(weight))
     }
 }

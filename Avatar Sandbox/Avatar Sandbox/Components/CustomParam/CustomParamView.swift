@@ -74,8 +74,14 @@ final class CustomParamView: UIView {
     // MARK: - @Objc methods
     
     @objc func sliderDidChange() {
-        let formattedValue = Int(slider.value * 100)
-        textField.text = String(formattedValue)
+        if type == .age {
+            let formattedValue = Int(slider.value * 100)
+            textField.text = String(formattedValue)
+        } else {
+            let formattedValue = (slider.value * 1000).rounded() / 10
+            textField.text = String(formattedValue)
+        }
+        
         delegate?.didTriggerTextField(of: type, with: textField.text)
     }
     

@@ -152,6 +152,12 @@ final class CharacterView: UIView {
         weightInputView.showError()
     }
     
+    func refreshStats(age: String?, height: String?, weight: String?) {
+        ageInputView.setText(age)
+        heightInputView.setText(height)
+        weightInputView.setText(weight)
+    }
+    
     func contentDown() {
         bounds.size.height -= bottomInset
         bottomInset = 0

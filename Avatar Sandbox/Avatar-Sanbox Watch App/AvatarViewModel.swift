@@ -35,6 +35,16 @@ public final class AvatarViewModel: ObservableObject {
     }
     
     func sync() {
-        session.sendMessage(["test" : "Hello iOS"], replyHandler: nil)
+        if (session.isReachable) {
+            let message = [
+                "age": avatarStats.age,
+                "height": avatarStats.height,
+                "weight": avatarStats.weight
+            ] as [String : Any]
+            
+            WCSession.default.sendMessage(message, replyHandler: nil)
+        } else {
+            print("Session is not reachable")
+        }
     }
 }
