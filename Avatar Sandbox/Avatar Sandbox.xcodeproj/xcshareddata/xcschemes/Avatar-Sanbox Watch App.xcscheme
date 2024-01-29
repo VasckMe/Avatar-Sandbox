@@ -42,6 +42,17 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "18B0519D2B6727A6007B0C36"
+               BuildableName = "Avatar SandboxTests.xctest"
+               BlueprintName = "Avatar SandboxTests"
+               ReferencedContainer = "container:Avatar Sandbox.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

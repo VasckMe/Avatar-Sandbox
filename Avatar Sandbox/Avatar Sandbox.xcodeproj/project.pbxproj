@@ -35,6 +35,7 @@
 		18A1E74B2B6451B200FE9FE3 /* AvatarImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E74A2B6451B200FE9FE3 /* AvatarImage.swift */; };
 		18ADFAB52B65670B00E48240 /* AvatarImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1E74A2B6451B200FE9FE3 /* AvatarImage.swift */; };
 		18ADFAB92B65899500E48240 /* AvatarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ADFAB82B65899500E48240 /* AvatarModel.swift */; };
+		18B051A82B672834007B0C36 /* ValidationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B051A72B672834007B0C36 /* ValidationServiceTests.swift */; };
 		18DA98D82B671E19002C4956 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DA98D52B671E19002C4956 /* CircleImage.swift */; };
 		18DA98D92B671E19002C4956 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DA98D62B671E19002C4956 /* AvatarView.swift */; };
 		18DA98DA2B671E19002C4956 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DA98D72B671E19002C4956 /* DetailsView.swift */; };
@@ -50,6 +51,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 1828ED912B6552A8000E56CC;
 			remoteInfo = "Avatar-Sanbox Watch App";
+		};
+		18B051A22B6727A6007B0C36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18A1E7052B640E8100FE9FE3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 18A1E70C2B640E8100FE9FE3;
+			remoteInfo = "Avatar Sandbox";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -125,6 +133,8 @@
 		18A1E74A2B6451B200FE9FE3 /* AvatarImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarImage.swift; sourceTree = "<group>"; };
 		18ADFA782B655AFB00E48240 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		18ADFAB82B65899500E48240 /* AvatarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarModel.swift; sourceTree = "<group>"; };
+		18B0519E2B6727A6007B0C36 /* Avatar SandboxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Avatar SandboxTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		18B051A72B672834007B0C36 /* ValidationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationServiceTests.swift; sourceTree = "<group>"; };
 		18DA98D52B671E19002C4956 /* CircleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		18DA98D62B671E19002C4956 /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		18DA98D72B671E19002C4956 /* DetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
@@ -143,6 +153,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				18A1E7262B6412F900FE9FE3 /* SnapKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18B0519B2B6727A6007B0C36 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +217,7 @@
 			children = (
 				18A1E70F2B640E8100FE9FE3 /* Avatar Sandbox */,
 				1828ED932B6552A8000E56CC /* Avatar-Sanbox Watch App */,
+				18B0519F2B6727A6007B0C36 /* Avatar SandboxTests */,
 				18A1E70E2B640E8100FE9FE3 /* Products */,
 				18A01C1B2B6547F300E5983F /* Frameworks */,
 			);
@@ -210,6 +228,7 @@
 			children = (
 				18A1E70D2B640E8100FE9FE3 /* Avatar Sandbox.app */,
 				1828ED922B6552A8000E56CC /* Avatar-Sanbox Watch App.app */,
+				18B0519E2B6727A6007B0C36 /* Avatar SandboxTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -217,14 +236,14 @@
 		18A1E70F2B640E8100FE9FE3 /* Avatar Sandbox */ = {
 			isa = PBXGroup;
 			children = (
-				18A01BF72B65289300E5983F /* Service */,
 				18A1E72B2B6419A000FE9FE3 /* App */,
-				18A1E72E2B641A5300FE9FE3 /* Module */,
 				18A1E7302B641A7500FE9FE3 /* Components */,
 				18A1E72F2B641A6B00FE9FE3 /* Extension */,
+				18A1E72E2B641A5300FE9FE3 /* Module */,
 				18A1E7492B64518200FE9FE3 /* Resources */,
-				18A1E71B2B640E8400FE9FE3 /* LaunchScreen.storyboard */,
+				18A01BF72B65289300E5983F /* Service */,
 				18A1E71E2B640E8400FE9FE3 /* Info.plist */,
+				18A1E71B2B640E8400FE9FE3 /* LaunchScreen.storyboard */,
 			);
 			path = "Avatar Sandbox";
 			sourceTree = "<group>";
@@ -296,6 +315,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		18B0519F2B6727A6007B0C36 /* Avatar SandboxTests */ = {
+			isa = PBXGroup;
+			children = (
+				18B051A72B672834007B0C36 /* ValidationServiceTests.swift */,
+			);
+			path = "Avatar SandboxTests";
+			sourceTree = "<group>";
+		};
 		18DA98D42B671E19002C4956 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -350,6 +377,24 @@
 			productReference = 18A1E70D2B640E8100FE9FE3 /* Avatar Sandbox.app */;
 			productType = "com.apple.product-type.application";
 		};
+		18B0519D2B6727A6007B0C36 /* Avatar SandboxTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18B051A62B6727A6007B0C36 /* Build configuration list for PBXNativeTarget "Avatar SandboxTests" */;
+			buildPhases = (
+				18B0519A2B6727A6007B0C36 /* Sources */,
+				18B0519B2B6727A6007B0C36 /* Frameworks */,
+				18B0519C2B6727A6007B0C36 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				18B051A32B6727A6007B0C36 /* PBXTargetDependency */,
+			);
+			name = "Avatar SandboxTests";
+			productName = "Avatar SandboxTests";
+			productReference = 18B0519E2B6727A6007B0C36 /* Avatar SandboxTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -365,6 +410,10 @@
 					};
 					18A1E70C2B640E8100FE9FE3 = {
 						CreatedOnToolsVersion = 14.2;
+					};
+					18B0519D2B6727A6007B0C36 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 18A1E70C2B640E8100FE9FE3;
 					};
 				};
 			};
@@ -386,6 +435,7 @@
 			targets = (
 				18A1E70C2B640E8100FE9FE3 /* Avatar Sandbox */,
 				1828ED912B6552A8000E56CC /* Avatar-Sanbox Watch App */,
+				18B0519D2B6727A6007B0C36 /* Avatar SandboxTests */,
 			);
 		};
 /* End PBXProject section */
@@ -406,6 +456,13 @@
 			files = (
 				18A1E71D2B640E8400FE9FE3 /* LaunchScreen.storyboard in Resources */,
 				18A1E71A2B640E8400FE9FE3 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18B0519C2B6727A6007B0C36 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +511,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		18B0519A2B6727A6007B0C36 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18B051A82B672834007B0C36 /* ValidationServiceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -461,6 +526,11 @@
 			isa = PBXTargetDependency;
 			target = 1828ED912B6552A8000E56CC /* Avatar-Sanbox Watch App */;
 			targetProxy = 1828EDA32B655633000E56CC /* PBXContainerItemProxy */;
+		};
+		18B051A32B6727A6007B0C36 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 18A1E70C2B640E8100FE9FE3 /* Avatar Sandbox */;
+			targetProxy = 18B051A22B6727A6007B0C36 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -708,6 +778,42 @@
 			};
 			name = Release;
 		};
+		18B051A42B6727A6007B0C36 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H568TQC48W;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "KA.Avatar-SandboxTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Avatar Sandbox.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Avatar Sandbox";
+			};
+			name = Debug;
+		};
+		18B051A52B6727A6007B0C36 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H568TQC48W;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "KA.Avatar-SandboxTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Avatar Sandbox.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Avatar Sandbox";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -734,6 +840,15 @@
 			buildConfigurations = (
 				18A1E7222B640E8400FE9FE3 /* Debug */,
 				18A1E7232B640E8400FE9FE3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18B051A62B6727A6007B0C36 /* Build configuration list for PBXNativeTarget "Avatar SandboxTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18B051A42B6727A6007B0C36 /* Debug */,
+				18B051A52B6727A6007B0C36 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

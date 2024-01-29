@@ -55,6 +55,7 @@ struct AvatarView: View {
                 Button("Sync") {
                     viewModel.sync()
                 }
+                .foregroundColor(Color.blue)
                 .padding()
             }
         }
